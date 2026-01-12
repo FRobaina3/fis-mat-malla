@@ -2,10 +2,14 @@ const estados=["disponible" , "cursoAprobado", "examenAprobado"];
 const materiasMap= new Map();
 const totalCreditosMap= new Map();
 
-//Ciencias Basicas
+//Las previas son para tomar el curso, no para tomar el examen.
+// Hay algunas materia que tienen la condicion no debe tener aprobadas:... estas condiciones no estan tenidas en cuenta
+//Solo estan las materias que fueron dictadas en 2025, si no fueron dictadas o no tenian paguina del eva probablemente no las agregue
+//El comentario al lado del curso es su codigo de bedelias
+//el valor condicionesPrevias es un conjunto de opciones, para habilitar la materia se tiene q cumplir al menos una de estas opciones
+//previaCurso es la lista de cursos que hay que tener aprobados para poder cursar
+//previasExamen es la lista de examenes que hay que tener aprobados para poder cursar
 const matematicas=[
-    //Matematica
-
     //estas previas son para dar el curso (no el examen)
     {id:"CDIV", //1061
     nombre:"Calculo DIV",
@@ -632,13 +636,6 @@ const actividadesComplementarias=[
     },
     creditosPorArea: new Map()
     },
-    {id:"TRepComGrafA", //1266
-    nombre:"Taller Representacion y Comunicacion  Graf. mod. A",
-    creditos:4,
-    previasExamen:[],
-    previasCurso:[],
-    creditosPorArea: new Map()
-    },
     {id:"TRepComGrafB", //1269
     nombre:"Taller Representacion y Comunicacion  Graf. mod. B",
     creditos:4,
@@ -753,7 +750,7 @@ const areaDeFormacionTecnologica=[
     previasCurso:["seys"],
     creditosPorArea: new Map(["matematicas",50])
     },
-    {id:"DisLog",//2512
+    {id:"DisLog",//2512 o 1512
     nombre:"Diseño Logico",
     creditos:12,
     previasExamen:[],
@@ -871,7 +868,7 @@ const areaDeFormacionTecnologica=[
     previasCurso:[],
     creditosPorArea: new Map()
     },
-    {id:"arqComp", //1466
+    {id:"ArqComp", //1466
     nombre:"Arquitecura de Computadoras",
     creditos:10,
     previasExamen:["P1"],
@@ -936,19 +933,6 @@ const areaDeFormacionTecnologica=[
     },
     creditosPorArea: new Map()
     },
-    {id:"FluDin",//Q66 HAY DOS FLUIDODINAMICAS  166 Y 166B
-    nombre:"Fluidodinamica [Q66]",
-    creditos:14,
-    previasExamen:["IIP","F3","FisTer"],// fenomenos de transporte... q22
-    previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
-    creditosPorArea: new Map()
-    },
     {id:"CNL", //5913
     nombre:"Analisis y Control de SIstemas No Lineales",
     creditos:10,
@@ -973,6 +957,333 @@ const areaDeFormacionTecnologica=[
     },
     creditosPorArea: new Map(["fisica",50], ["matematicas", 50])
     },
+    {id:"BDIng",// 1892
+    nombre:"Bases de Datos para Ing.",
+    creditos:10,
+    previasExamen:["P2","P1"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["matematicas",50],["fisica",50])
+    },
+    {id:"EA1", //5716
+    nombre:"Electronica Avanzada 1",
+    creditos:10,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["ElecMag","teocirc"],
+            previasCurso:["ElecFund"],
+        },
+    },
+    creditosPorArea: new Map(["matematicas",54], ["fisica",40])
+    },
+    {id:"ElecFund",//5715
+    nombre:"Electronica Fundamental",
+    creditos:11,
+    previasExamen:["CDIVV","F1","GAL1","GAL2","CDIV","F3"],
+    previasCurso:["ElecMag","FExp1","teocric"],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["fisica",20],["matematicas",50])
+    },
+    {id:"Electro",//5850
+    nombre:"Electrotecnica",
+    creditos:10,
+    previasExamen:["F3","GAL2","GAL1","CDIVV","CDIV","F1"],
+    previasCurso:["teocirc","MecNew","ElecMag"],
+    creditosPorArea: new Map(["fisica",35])
+    },
+    {id:"Electro1",//2108
+    nombre:"Electrotecnica 1",
+    creditos:9,
+    previasExamen:["F3"],
+    previasCurso:["CDIVV"],
+    creditosPorArea: new Map()
+    },
+    {id:"Electro2",//2109
+    nombre:"Electrotecnica 2",
+    creditos:9,
+    previasExamen:[],
+    previasCurso:["Electro1"],
+    creditosPorArea: new Map()
+    },
+    {id:"En1-C",//1850
+    nombre:"Energia 1-Combustion",
+    creditos:10,
+    previasExamen:["FisTer"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"En1", //1809
+    nombre:"Energia 1",
+    creditos:10,
+    previasExamen:["FisTer"], 
+    previasCurso:["En1-C"],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"FBD",//1911
+    nombre:"Fundamentos de Bases de Datos",
+    creditos:15,
+    previasExamen:["P2","P1"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["Logica"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["fisica", 50],["matematicas",50])
+    },
+    {id:"FRA",//1857
+    nombre:"Fundmanetos de la Robotica Autonoma",
+    creditos:7,
+    previasExamen:["P2","P1"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["ArqComp"],
+            previasCurso:[],            
+        }
+    },
+    creditosPorArea: new Map(["fisica",50],["matematicas",50])
+    },
+    {id:"FRI",//1788
+    nombre:"Fundmanetos de la Robotica Industrial",
+    creditos:8,
+    previasExamen:["MecNew","P1"],
+    previasCurso:[],
+    creditosPorArea: new Map(["fisica",50], ["matematicas",50])
+    },
+    {id:"IElec",//5507
+    nombre:"Instalaciones Electricas",
+    creditos:8,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["teocirc"],
+            previasCurso:["Electro"],
+        },
+        cond2:{
+            previasExamen:["Electro1"],
+            previasCurso:["Electro2"],           
+        }
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"IntroPLN",//1828
+    nombre:"Int. al procesamiento del Lenguaje Natural",
+    creditos:12,
+    previasExamen:["P3","TL","PyE","P4"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["Logica"],
+            previasCurso:[],
+        },
+        
+    },
+    creditosPorArea: new Map(["matematicas",50],["fisca",50])
+    },
+    {id:"RedComp",//1446
+    nombre:"Redes de Computadoras",
+    creditos:12,
+    previasExamen:["P3"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["ArqComp"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["matematicas",50],["fisca",50])
+    },
+    {id:"RedDat",//5824
+    nombre:"Redes de Datos 1",
+    creditos:8,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:["DisLog"],
+        },
+        cond2:{
+            previasExamen:["P1"],
+            previasCurso:["P2"],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"RedElec", //5508
+    nombre:"Redes Electricas",
+    creditos:10,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["Electro1"],
+            previasCurso:["Electro2"],
+        },
+        cond2:{
+            previasExamen:["teocirc"],
+            previasCurso:["Electro"],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"RBC",//1884
+    nombre:"Robotica Basada en Comportamiento",
+    creditos:15,
+    previasExamen:["P2","P1"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["ArqComp"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["matematicas",50],["fisica",50])
+    },
+    {id:"SisOp", //1537
+    nombre:"Sistemas Operativos x_x",
+    creditos:12,
+    previasExamen:["P1","P2","MD1"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["ArqComp"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["matematicas", 50], ["fisica", 50])
+    },
+    {id:"SubMT",//5514
+    nombre:"Subestaciones en Media Tension",
+    creditos:8,
+    previasExamen:[],
+    previasCurso:["RedElec","IElec"],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["Electro"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["Electro2"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"TAA",//5720
+    nombre:"Taller de Aprendizaje Automatico",
+    creditos:4,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:["ApAuto"],
+        },
+        cond2:{
+            previasExamen:["FuAA"],
+            previasCurso:[],
+        },
+        cond3:{
+            previasExamen:["FuAA"],//reconocimento de patrones 5842 en ves de FuAA
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"TAyAGL",//1633
+    nombre:"Teo. Algoritmos y Aplicaciones de Gestion Logistica",
+    creditos:8,
+    previasExamen:[],
+    previasCurso:["ModOpt"],
+    creditosPorArea: new Map()
+    },
+    {id:"TL",//1325
+    nombre:"Teoria de Lenguajes",
+    creditos:12,
+    previasExamen:["P3"],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["Logica"],
+            previasCurso:[],
+        },
+        cond2:{
+            previasExamen:["DisLog"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["fisica",50], ["matematicas",50])
+    },
+    {id:"TrEE",//5520
+    nombre:"Transporte de Energia Electrica",
+    creditos:8,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:["teocirc"],
+            previasCurso:["RedElec"],
+        },
+        cond2:{
+            previasExamen:["Electro1"],
+            previasCurso:["RedElec"],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+
     // {id:"",
     // nombre:"",
     // creditos:,
@@ -986,6 +1297,80 @@ const areaDeFormacionTecnologica=[
     // },
     // creditosPorArea: new Map()
     // },
+]
+const Talleres=[
+    {id:"TPAudioVid",//1990
+    nombre:"Taller Proces. Audio/Video con Pure Data/Gem",
+    creditos:4,
+    //La condicion de esta es NO TENER unos tallers. no tengo para represenar esto
+    previasExamen:[],
+    previasCurso:[], 
+    creditosPorArea: new Map()
+    },   
+    {id:"FExp3", //1156
+    nombre:"Fisica Experimental 3",
+    creditos:6,
+    previasExamen:[],
+    previasCurso:["FExp1", "FExp2"],
+    creditosPorArea: new Map(["fisica", 55])
+    },   
+    {id:"TAA", //5720
+    nombre:"Taller de apredizaje automatico",
+    creditos:6,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:["ApAuto"],
+        },
+        cond1:{
+            previasExamen:["FuAA"],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map()
+    },   
+    {id:"TIngFisMat",//1889
+    nombre:"Taller de ingenieria Fisico-Matematica",
+    creditos:6,
+    previasExamen:[],
+    previasCurso:[],
+    creditosPorArea: new Map(["creditosGlobal",200])
+    },
+    {id:"TIIElec",//5904
+    nombre:"Taller intro. Ing. Electrica",
+    creditos:4,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map()
+    },
+    {id:"TRepComGrafA", //1266
+    nombre:"Taller Representacion y Comunicacion  Graf. mod. A",
+    creditos:4,
+    previasExamen:[],
+    previasCurso:[],
+    creditosPorArea: new Map()
+    },
+    {id:"TallFour", //1459
+    nombre:"Taller Fourier",
+    creditos:8,
+    previasExamen:[],
+    previasCurso:["seys","teocirc","FExp1","ElecMag"],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["fisica",35],["matematicas",50])
+    },
     // {id:"",
     // nombre:"",
     // creditos:,
@@ -999,32 +1384,32 @@ const areaDeFormacionTecnologica=[
     // },
     // creditosPorArea: new Map()
     // },
-    // {id:"",
-    // nombre:"",
-    // creditos:,
-    // previasExamen:[],
-    // previasCurso:[],
-    // condicionesPrevias:{
-    //     cond1:{
-    //         previasExamen:[],
-    //         previasCurso:[],
-    //     },
-    // },
-    // creditosPorArea: new Map()
-    // },
-    // {id:"",
-    // nombre:"",
-    // creditos:,
-    // previasExamen:[],
-    // previasCurso:[],
-    // condicionesPrevias:{
-    //     cond1:{
-    //         previasExamen:[],
-    //         previasCurso:[],
-    //     },
-    // },
-    // creditosPorArea: new Map()
-    // },
+]
+const pasantia=[
+    {id:"Pasantia",//18887
+    nombre:"Pasantia",
+    creditos:10,
+    previasExamen:[],
+    previasCurso:[],
+    creditosPorArea: new Map(["cienciasDeLaIngenieria",20], 
+                            ["ingenieriaAplicada"], ["cienciasBasicas",150])
+    },  
+]
+const proyectoFinal=[
+    {id:"Proy",//1885
+    nombre:"Proyecto Final",
+    creditos:35,
+    previasExamen:[],
+    previasCurso:[],
+    condicionesPrevias:{
+        cond1:{
+            previasExamen:[],
+            previasCurso:[],
+        },
+    },
+    creditosPorArea: new Map(["creditosGlobal",280],["cienciasDeLaIngenieria", 50],
+                            ["cienciasBasicas",170],["areaDeFormacionTecnologica",40])
+    },   
 ]
 
 matematicas.forEach(mat=>{materiasMap.set(mat.id, mat)});
