@@ -6,23 +6,87 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <p id="creditosGlobal">Creditos:</p>
+    <p id="creditosGlobal" data-creditos="0">Creditos:</p>
     <p> Minimo 450</p>
     <div class="grupo"> 
         <p>Ciencias Basias</p>
-        <p>Creditos: 0 / 200</p>
+        <p id="creditosCienciasBasicas" data-creditos="0">Creditos: 0 / 200 minimo</p>
         <div class="lista-materias"> 
             <p>Matematicas</p>
-            <p id="creditosMatematicas">Creditos:0 / 75</p>
+            <p id="creditosmatematicas" data-creditos="0">Creditos:0 / 75 minimo</p>
             <div id="matematicas"></div>
         </div>
         <div class="lista-materias">
             <p>Fisica</p>
-            <p id="creditosFisica">Creditos: 0 / 75</p>      
+            <p id="creditosfisica" data-creditos="0">Creditos: 0 / 75 minimo</p>      
             <div id="fisica"></div>
         </div>
+        <div class="lista-materias">
+            <p>Quimica</p>
+            <p id="creditosquimica" data-creditos="0">Creditos: 0 / 0 minimo</p>      
+            <div id="quimica"></div>
+        </div>
+        <div class="lista-materias">
+            <p>Biologia</p>
+            <p id="creditosbiologia" data-creditos="0">Creditos: 0 / 0 minimo</p>      
+            <div id="biologia">... no hagas biologia</div>
+        </div>
+        
     </div>
-
+    <div class="grupo"> 
+        <p>Ciencias de la Ingenieria</p>
+        <p id="creditosCienciasDeLaIngenieria" data-creditos="0">Creditos: 0 / 80</p>
+        <div class="lista-materias">
+            <p>Computacion Cientifica</p>
+            <p id="creditosComputacionCientifica" data-creditos="0">Creditos: 0 / 50 minimo</p>      
+            <div id="ComputacionCientifica"></div>
+        </div>
+        <div class="lista-materias">
+            <p>Modelado Fisco-Matematico</p>
+            <p id="creditosModeladoFiscoMatematico" data-creditos="0">Creditos: 0 / 20 minimo</p>      
+            <div id="ModeladoFiscoMatematico"></div>
+        </div>
+    </div>
+    <div class="grupo"> 
+        <p>Contenidos Complementarios</p>
+        <p id="creditosContenidosComplementarios" data-creditos="0">Creditos: 0 / 12</p>
+        <div class="lista-materias">
+            <p>Actividades Complementarias</p>
+            <p id="creditosActividadesComplementarias" data-creditos="0">Creditos: 0 / 0 minimo</p>      
+            <div id="ActividadesComplementarias"></div>
+        </div>
+        <div class="lista-materias">
+            <p>Ingenieria y Sociedad</p>
+            <p id="creditosIngenieriaYSociedad" data-creditos="0">Creditos: 0 / 12 minimo</p>      
+            <div id="IngenieriaYSociedad"></div>
+        </div>
+    </div>
+    <div class="grupo"> 
+        <p>Ingenieria Aplicada</p>
+        <p id="creditosIngenieriaAplicada" data-creditos="0">Creditos: 0 / 120</p>
+        <div class="lista-materias">
+            <p>Area de Formacion Tecnologica</p>
+            <p id="creditosAreaDeFormacionTecnologica" data-creditos="0">Creditos: 0 / 60 minimo</p>      
+            <div id="AreaDeFormacionTecnologica"></div>
+        </div>
+        <div class="lista-materias">
+            <p>Talleres</p>
+            <p id="creditosTalleres" data-creditos="0">Creditos: 0 / 10 minimo</p>      
+            <div id="Talleres"></div>
+        </div>
+        <div class="lista-materias">
+            <p>Pasantias</p>
+            <p id="creditosPasantia" data-creditos="0">Creditos: 0 / 8 minimo</p>      
+            <div id="Pasantia"></div>
+        </div>
+        <div class="lista-materias">
+            <p>Proyecto Final</p>
+            <p id="creditosProyectoFinal" data-creditos="0">Creditos: 0 / 35 minimo</p>      
+            <div id="ProyectoFinal"></div>
+        </div>
+    </div>
+    <div id="repetidasId"></div>
+    <div id="repetidasNombre"></div>
     
     
 

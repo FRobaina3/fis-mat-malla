@@ -9,6 +9,10 @@ const totalCreditosMap= new Map();
 //el valor condicionesPrevias es un conjunto de opciones, para habilitar la materia se tiene q cumplir al menos una de estas opciones
 //previaCurso es la lista de cursos que hay que tener aprobados para poder cursar
 //previasExamen es la lista de examenes que hay que tener aprobados para poder cursar
+
+//==============================
+//  FALTA CONTROLAR LOS CREDITOS
+//===============================
 const matematicas=[
     //estas previas son para dar el curso (no el examen)
     {id:"CDIV", //1061
@@ -106,8 +110,8 @@ const matematicas=[
     nombre:"Señales y Sistemas",
     creditos:4,
     previasExamen:["GAL2","CDIV" ,"CDIVV", "GAL1", "F3", "FExp1", "F1"],
-    previasCurso:["ElecMag", "teocirc", "EcDif"], //previas de materias todavia no ingresadas
-    creditosPorArea: new Map()
+    previasCurso:["ElecMag", "teocirc", "EcDif"], 
+    creditosPorArea: new Map([["creditosfisica",45], ["creditosmatematicas",50]])
     }
 
 ]
@@ -164,7 +168,7 @@ const fisica=[
     }, 
 
     //============================
-    //  PROBLEMAS CON LAS PREVIAS ALGUNAS PREVIAS
+    //  PROBLEMAS CON ALGUNAS PREVIAS
     //============================
     {id:"FisTer", //1123
     nombre:"Fisica Termica",
@@ -201,10 +205,10 @@ const fisica=[
     creditosPorArea: new Map()
     },
     {id:"MecFl", //1226
-    nombre:"Mecanica de lso Fluidos",
+    nombre:"Mecanica de los Fluidos",
     creditos:12,
     previasExamen:["GAL1"],
-    previasCurso:["EcDif","EMF"],//FALTA ELEMENTOS DE MECANICA DE LOS FLUIDOS PERO NO PARECE COMO OPCION EN BEDELIAS
+    previasCurso:["EcDif","EMF"],
     creditosPorArea: new Map() 
     },     
     {id:"POM", //1257
@@ -222,7 +226,7 @@ const fisica=[
             previasCurso:[],
         }
     },
-    creditosPorArea: new Map([["fisica",60], ["matematicas", 60]]) //TODAVIA NO CONTROLO CREDITOS
+    creditosPorArea: new Map([["creditosfisica",60], ["creditosmatematicas", 60]]) //TODAVIA NO CONTROLO CREDITOS
     }, 
     {id:"ProCuIn", //1158
     nombre:"Procesamiento Cunatico de la Informacion",
@@ -292,9 +296,9 @@ const quimica=[
     {id:"ICienMat", //1723
     nombre:"Int. a la Ciencia de los Materiales",
     creditos:12,
-    previasExamen:["F1", "GAL1","CDIV"],// FALTA LIMITE DE CREDITOS
+    previasExamen:["F1", "GAL1","CDIV"],
     previasCurso:["F2"],
-    creditosPorArea: new Map()
+    creditosPorArea: new Map([["creditosGlobal",60]])
     },  
     {id:"PQuimGen", //1620
     nombre:"Principios de Quimica General",
@@ -309,28 +313,16 @@ const computacionCientifica=[
     {id:"MetNum",//2041
     nombre:"Metodos Numericos",
     creditos:10,
-    previasExamen:[],
+    previasExamen:["CDIV","CDIVV","P1","GAL2"],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        }
-    },
     creditosPorArea: new Map()
     }, 
     {id:"SimSEE",//5517
     nombre:"Simulacion de Sist. de Energia Electrica ",
     creditos:8,
-    previasExamen:[],
+    previasExamen:["teocirc"],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        }
-    },
-    creditosPorArea: new Map()
+    creditosPorArea: new Map([["creditosModeladoFiscoMatematico",20], ["creditosCienciasBasicas",140], ["creditosComputacionCientifica",35]])
     },
     {id:"P1", //1373
     nombre:"Programacion 1",
@@ -396,7 +388,7 @@ const computacionCientifica=[
     {id:"MCACE", //2380
     nombre:"Met. Comp. Apl. Calculo Estructural",
     creditos:10,
-    previasExamen:["P1"], //REVISAR LAS PREVIAS MAS TARDE, TIENE MATERIAS QUE NO AGREGUE
+    previasExamen:["P1","Elas","ResMat1","ResMat2"], 
     previasCurso:[],
     creditosPorArea: new Map()
     }, 
@@ -405,7 +397,7 @@ const computacionCientifica=[
     creditos:9,
     previasExamen:["MetNum", "P2"],
     previasCurso:[],
-    creditosPorArea: new Map(["fisica",50])
+    creditosPorArea: new Map([["creditosfisica",50]])
     }, 
     {id:"ElemFini", //1884
     nombre:"Elementos Finitos",
@@ -440,12 +432,6 @@ const computacionCientifica=[
     creditos:6,
     previasExamen:["IIO"],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        }
-    },
     creditosPorArea: new Map()
     }, 
     {id:"ModE", //1868
@@ -467,12 +453,13 @@ const computacionCientifica=[
     creditos:10,
     previasExamen:["IIO","PyE","P1"],
     previasCurso:[],
-    creditosPorArea: new Map(["creditosGlobal",220])
+    creditosPorArea: new Map([["creditosGlobal",220]])
     }, 
  
 ]
 
 const modeladoFisicoMatematico=[
+    //FALTAN MATERIAS DE QUIMICA 
     {id:"ResMat1",//2368
     nombre:"Resistencia de Materiales 1 ",
     creditos:10,
@@ -480,7 +467,7 @@ const modeladoFisicoMatematico=[
     previasCurso:["GAL2", "MecNew"],
     creditosPorArea: new Map()
     }, 
-    {id:"Elasticidad", //2366
+    {id:"Elas", //2366
     nombre:"Elasticidad",
     creditos:10,
     previasExamen:[],
@@ -492,7 +479,7 @@ const modeladoFisicoMatematico=[
         },
         cond2:{
             previasExamen:["CV","MecNew"],
-            previasCurso:["CompMM1"],//comportamiento mecanico de los materiales 1
+            previasCurso:["CompMM1"],
         },
         cond3:{
             previasExamen:["CV"],
@@ -500,15 +487,15 @@ const modeladoFisicoMatematico=[
         },
         cond4:{
             previasExamen:[],
-            previasCurso:["ResMat1", "CompMM1"],//Comportamiento mecanico de los materiales  
+            previasCurso:["ResMat1", "CompMM1"],
         },
         cond5:{
             previasExamen:["CV"],
-            previasCurso:["CompMM1"], //Comportamiento mecanico de los materiales
+            previasCurso:["CompMM1"], 
         },
         cond6:{
             previasExamen:["MecNew"],
-            previasCurso:["CompMM1"],//Comportamiento mecanico de los materiales
+            previasCurso:["CompMM1"],
         },
         cond7:{
             previasExamen:["MecNew","CV"],
@@ -523,7 +510,7 @@ const modeladoFisicoMatematico=[
             previasCurso:["ResMat1"], 
         },        
 
-    }, //le faltan materias qeu no ingrese
+    }, 
     creditosPorArea: new Map()
     }, 
     {id:"TC1",//1823
@@ -545,7 +532,7 @@ const modeladoFisicoMatematico=[
     creditos:8,
     previasExamen:["PyE", "teocirc"],
     previasCurso:["seys"], 
-    creditosPorArea: new Map(["fisica",40],["matematicas",59])
+    creditosPorArea: new Map([["creditosfisica",40],["creditosmatematicas",59]])
     }, 
     {id:"seys", //1457
     nombre:"Señales y Sistemas",
@@ -559,14 +546,14 @@ const modeladoFisicoMatematico=[
     creditos:8,
     previasExamen:["CDIVV","F1","CDIV","GAL1"],
     previasCurso:["F3"],
-    creditosPorArea: new Map(["fisica",15])
+    creditosPorArea: new Map([["creditosfisica",15]])
     }, 
     {id:"CompMM1",//1764
-    nombre:"Compratamiento mecanico de los materiales 1",
+    nombre:"Comporatamiento Mecanico de los Materiales 1",
     creditos:13,
     previasExamen:[],
     previasCurso:[],
-    creditosPorArea: new Map(["fisica", 25], ["matematicas",30])
+    creditosPorArea: new Map([["creditosfisica", 25], ["creditosmatematicas",30]])
     }, 
 ]
 const actividadesComplementarias=[
@@ -575,13 +562,6 @@ const actividadesComplementarias=[
     creditos:3,
     previasExamen:[], //No existe en el sistema de previas
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-
-    },
     creditosPorArea: new Map()
     },
     {id:"SemInv",//2907
@@ -589,7 +569,7 @@ const actividadesComplementarias=[
     creditos:4,
     previasExamen:[],
     previasCurso:[],
-    creditosPorArea: new Map(["creditosGlobal",250])
+    creditosPorArea: new Map([["creditosGlobal",250]])
     },
 
     //hay 3, Tutorias entre pares 1, tutoria entre pares 2, tutoria entre pares academicas progresa/fing
@@ -614,7 +594,7 @@ const actividadesComplementarias=[
             previasCurso:["GAL2"],          
         }
     },
-    creditosPorArea: new Map(["credtosGlobal",55])
+    creditosPorArea: new Map([["creditosGlobal",55]])
     },
     {id:"IIProd", //2416
     nombre:"Int. Ing. en Produccion",
@@ -628,12 +608,6 @@ const actividadesComplementarias=[
     creditos:6,
     previasExamen:[],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
     creditosPorArea: new Map()
     },
     {id:"TRepComGrafB", //1269
@@ -658,13 +632,13 @@ const ingenieriaYSociedad=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["creditosGlobal", 140])
+    creditosPorArea: new Map([["creditosGlobal", 140]])
     },
     {id:"PAI",//1945
     nombre:"Practica Admin. para Ing.",
     creditos:5,
     previasExamen:[],
-    previasCurso:["PAI"],
+    previasCurso:["AGPI"],//1944
     creditosPorArea: new Map()
     },
     {id:"Eco", //1224
@@ -672,12 +646,6 @@ const ingenieriaYSociedad=[
     creditos:7,
     previasExamen:[],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
     creditosPorArea: new Map()
     },
     {id:"CTS",//1223
@@ -692,20 +660,14 @@ const ingenieriaYSociedad=[
     creditos:8,
     previasExamen:[],
     previasCurso:["PyE"],
-    creditosPorArea: new Map(["creditosGlobal",80])
+    creditosPorArea: new Map([["creditosGlobal",80]])
     },
     {id:"SemAT",//1236
     nombre:"Seminario encuentro arte y tecno.",
     creditos:4,
     previasExamen:[],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
-    creditosPorArea: new Map(["creditosGlobal",90])
+    creditosPorArea: new Map([["creditosGlobal",90]])
     },
 ]
 const areaDeFormacionTecnologica=[
@@ -714,20 +676,14 @@ const areaDeFormacionTecnologica=[
     creditos:10,
     previasExamen:[],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
     creditosPorArea: new Map()
     },
     {id:"HE1", //2382
     nombre:"Hormigon Estructural 1",
     creditos:11,
     previasExamen:["ResMat1"],
-    previasCurso:["Elasticidad","ResMat2"], //creo que ResMat2 no lo agrege todavia
-    creditosPorArea: new Map(["qumica",5], ["computacionCientifica",30]) //computacionCientifica no si lo agregue
+    previasCurso:["Elas","ResMat2"], 
+    creditosPorArea: new Map([["creditosquimica",5], ["creditosComputacionCientifica",30]]) //computacionCientifica no si lo agregue
     },
     {id:"IMP", //1513
     nombre:"Intro. a los Microprocesadores",
@@ -736,19 +692,19 @@ const areaDeFormacionTecnologica=[
     previasCurso:["DisLog"], 
     creditosPorArea: new Map()
     },
-    {id:"CMM2", //1765
-    nombre:"Comportamiento Mecanico de Materiales 2: la venganza del acero",
+    {id:"CompMM2", //1765
+    nombre:"Comportamiento Mecanico de Materiales 2",
     creditos:13,
     previasExamen:[],
-    previasCurso:["CMM1","ICienMat"],
-    creditosPorArea: new Map(["fisica",30], ["matematicas",40])
+    previasCurso:["CompMM1","ICienMat"],
+    creditosPorArea: new Map([["creditosfisica",30], ["creditosmatematicas",40]])
     },
     {id:"FuAA",//5852
     nombre:"Fund. aprendizaje automatico[5852]",
     creditos:8,
     previasExamen:["P1","PyE"],
     previasCurso:["seys"],
-    creditosPorArea: new Map(["matematicas",50])
+    creditosPorArea: new Map([["creditosmatematicas",50]])
     },
     {id:"DisLog",//2512 o 1512
     nombre:"Diseño Logico",
@@ -762,12 +718,12 @@ const areaDeFormacionTecnologica=[
     creditos:11,
     previasExamen:["seys","ElecMag","teocirc","P1"],
     previasCurso:["SAM"],
-    creditosPorArea: new Map(["matematicas",70])
+    creditosPorArea: new Map([["creditosmatematicas",70]])
     },
     {id:"redesopt",//5907
     nombre:"Redes Opticas",
     creditos:10,
-    previasExamen:["SAM","redesdedatos1"], //todavia no agregue redes de datos 1
+    previasExamen:["SAM","RedDat"], 
     previasCurso:["CD"],
     creditosPorArea: new Map()
     },
@@ -778,18 +734,18 @@ const areaDeFormacionTecnologica=[
     previasCurso:[],
     condicionesPrevias:{
         cond1:{
-            previasExamen:["EMF","FisTer"],//no tengo electrotecnica 1
+            previasExamen:["EMF","FisTer","Electro1"],
             previasCurso:["CompMM1"],
         },
         cond2:{
             previasExamen:["teocirc"],
-            previasCurso:["seys"], //falta sistemas y control
+            previasCurso:["seys","SyC"], 
         }
     },
     creditosPorArea: new Map()
     },
-    {id:"Puentes",//2359
-    nombre:"Puetes",
+    {id:"Puent",//2359
+    nombre:"Puentes",
     creditos:10,
     previasExamen:["HE1","ResMat2"],
     previasCurso:["HE2"],
@@ -819,8 +775,8 @@ const areaDeFormacionTecnologica=[
     {id:"EA2",//5717
     nombre:"Electronica Avanzada 2",
     creditos:8,
-    previasExamen:["ElecMag", "teocirc"], //falta electronica fundamental
-    previasCurso:["EA1","seys"], //falta sistemas y control
+    previasExamen:["ElecMag", "teocirc","ElecFund"], 
+    previasCurso:["EA1","seys","SyC"], 
     creditosPorArea: new Map()
     },
     {id:"EPST",//5849
@@ -886,24 +842,24 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
         cond2:{
-            previasExamen:[],//electrotecnica 1
+            previasExamen:["Electro1"],
             previasCurso:[],           
         }
     },
     creditosPorArea: new Map()
     },
     {id:"SyC",//5905
-    nombre:"Sisteas y control",
+    nombre:"Sistemas y control",
     creditos:12,
     previasExamen:["teocirc"],
     previasCurso:["EcDif","FExp1","FVC","seys"],
-    creditosPorArea: new Map(["fisica", 45], ["matematicas",59])
+    creditosPorArea: new Map([["creditosfisica", 45], ["creditosmatematicas",59]])
     },
     {id:"ResMat2",//1312
     nombre:"Resistencia de Materiales 2",
     creditos:10,
     previasExamen:[],
-    previasCurso:["Elasticidad","ResMat1"],
+    previasCurso:["Elas","ResMat1"],
     creditosPorArea: new Map()
     },
     {id:"IIP",//Q59B
@@ -934,7 +890,7 @@ const areaDeFormacionTecnologica=[
     creditosPorArea: new Map()
     },
     {id:"CNL", //5913
-    nombre:"Analisis y Control de SIstemas No Lineales",
+    nombre:"Analisis y Control de Sistemas No Lineales",
     creditos:10,
     previasExamen:["EcDif"],
     previasCurso:[],
@@ -955,7 +911,7 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["fisica",50], ["matematicas", 50])
+    creditosPorArea: new Map([["creditosfisica",50], ["creditosmatematicas", 50]])
     },
     {id:"BDIng",// 1892
     nombre:"Bases de Datos para Ing.",
@@ -968,40 +924,28 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["matematicas",50],["fisica",50])
+    creditosPorArea: new Map([["creditosmatematicas",50],["creditosfisica",50]])
     },
     {id:"EA1", //5716
     nombre:"Electronica Avanzada 1",
     creditos:10,
-    previasExamen:[],
-    previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:["ElecMag","teocirc"],
-            previasCurso:["ElecFund"],
-        },
-    },
-    creditosPorArea: new Map(["matematicas",54], ["fisica",40])
+    previasExamen:["ElecMag","teocirc"],
+    previasCurso:["ElecFund"],
+    creditosPorArea: new Map([["creditosmatematicas",54], ["creditosfisica",40]])
     },
     {id:"ElecFund",//5715
     nombre:"Electronica Fundamental",
     creditos:11,
     previasExamen:["CDIVV","F1","GAL1","GAL2","CDIV","F3"],
-    previasCurso:["ElecMag","FExp1","teocric"],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
-    creditosPorArea: new Map(["fisica",20],["matematicas",50])
+    previasCurso:["ElecMag","FExp1","teocirc"],
+    creditosPorArea: new Map([["creditosfisica",20],["creditosmatematicas",50]])
     },
     {id:"Electro",//5850
     nombre:"Electrotecnica",
     creditos:10,
     previasExamen:["F3","GAL2","GAL1","CDIVV","CDIV","F1"],
     previasCurso:["teocirc","MecNew","ElecMag"],
-    creditosPorArea: new Map(["fisica",35])
+    creditosPorArea: new Map([["creditosfisica",35]])
     },
     {id:"Electro1",//2108
     nombre:"Electrotecnica 1",
@@ -1022,12 +966,6 @@ const areaDeFormacionTecnologica=[
     creditos:10,
     previasExamen:["FisTer"],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
     creditosPorArea: new Map()
     },
     {id:"En1", //1809
@@ -1035,12 +973,6 @@ const areaDeFormacionTecnologica=[
     creditos:10,
     previasExamen:["FisTer"], 
     previasCurso:["En1-C"],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
     creditosPorArea: new Map()
     },
     {id:"FBD",//1911
@@ -1058,7 +990,7 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["fisica", 50],["matematicas",50])
+    creditosPorArea: new Map([["creditosfisica", 50],["creditosmatematicas",50]])
     },
     {id:"FRA",//1857
     nombre:"Fundmanetos de la Robotica Autonoma",
@@ -1075,14 +1007,14 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],            
         }
     },
-    creditosPorArea: new Map(["fisica",50],["matematicas",50])
+    creditosPorArea: new Map([["creditosfisica",50],["creditosmatematicas",50]])
     },
     {id:"FRI",//1788
     nombre:"Fundmanetos de la Robotica Industrial",
     creditos:8,
     previasExamen:["MecNew","P1"],
     previasCurso:[],
-    creditosPorArea: new Map(["fisica",50], ["matematicas",50])
+    creditosPorArea: new Map([["creditosfisica",50], ["creditosmatematicas",50]])
     },
     {id:"IElec",//5507
     nombre:"Instalaciones Electricas",
@@ -1117,7 +1049,7 @@ const areaDeFormacionTecnologica=[
         },
         
     },
-    creditosPorArea: new Map(["matematicas",50],["fisca",50])
+    creditosPorArea: new Map([["creditosmatematicas",50],["creditosfisica",50]])
     },
     {id:"RedComp",//1446
     nombre:"Redes de Computadoras",
@@ -1134,7 +1066,7 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["matematicas",50],["fisca",50])
+    creditosPorArea: new Map([["creditosmatematicas",50],["creditosfisica",50]])
     },
     {id:"RedDat",//5824
     nombre:"Redes de Datos 1",
@@ -1185,7 +1117,7 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["matematicas",50],["fisica",50])
+    creditosPorArea: new Map([["creditosmatematicas",50],["creditosfisica",50]])
     },
     {id:"SisOp", //1537
     nombre:"Sistemas Operativos x_x",
@@ -1202,7 +1134,7 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["matematicas", 50], ["fisica", 50])
+    creditosPorArea: new Map([["creditosmatematicas", 50], ["creditosfisica", 50]])
     },
     {id:"SubMT",//5514
     nombre:"Subestaciones en Media Tension",
@@ -1264,7 +1196,7 @@ const areaDeFormacionTecnologica=[
             previasCurso:[],
         },
     },
-    creditosPorArea: new Map(["fisica",50], ["matematicas",50])
+    creditosPorArea: new Map([["creditosfisica",50], ["creditosmatematicas",50]])
     },
     {id:"TrEE",//5520
     nombre:"Transporte de Energia Electrica",
@@ -1312,7 +1244,7 @@ const Talleres=[
     creditos:6,
     previasExamen:[],
     previasCurso:["FExp1", "FExp2"],
-    creditosPorArea: new Map(["fisica", 55])
+    creditosPorArea: new Map([["creditosfisica", 55]])
     },   
     {id:"TAA", //5720
     nombre:"Taller de apredizaje automatico",
@@ -1336,19 +1268,13 @@ const Talleres=[
     creditos:6,
     previasExamen:[],
     previasCurso:[],
-    creditosPorArea: new Map(["creditosGlobal",200])
+    creditosPorArea: new Map([["creditosGlobal",200]])
     },
     {id:"TIIElec",//5904
     nombre:"Taller intro. Ing. Electrica",
     creditos:4,
     previasExamen:[],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
     creditosPorArea: new Map()
     },
     {id:"TRepComGrafA", //1266
@@ -1363,13 +1289,7 @@ const Talleres=[
     creditos:8,
     previasExamen:[],
     previasCurso:["seys","teocirc","FExp1","ElecMag"],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
-    creditosPorArea: new Map(["fisica",35],["matematicas",50])
+    creditosPorArea: new Map([["creditosfisica",35],["creditosmatematicas",50]])
     },
     // {id:"",
     // nombre:"",
@@ -1386,13 +1306,13 @@ const Talleres=[
     // },
 ]
 const pasantia=[
-    {id:"Pasantia",//18887
+    {id:"Pasan",//18887
     nombre:"Pasantia",
     creditos:10,
     previasExamen:[],
     previasCurso:[],
-    creditosPorArea: new Map(["cienciasDeLaIngenieria",20], 
-                            ["ingenieriaAplicada"], ["cienciasBasicas",150])
+    creditosPorArea: new Map([["creditosCienciasDeLaIngenieria",20], 
+                            ["creditosIngenieriaAplicada",20], ["creditosCienciasBasicas",150]])
     },  
 ]
 const proyectoFinal=[
@@ -1401,17 +1321,34 @@ const proyectoFinal=[
     creditos:35,
     previasExamen:[],
     previasCurso:[],
-    condicionesPrevias:{
-        cond1:{
-            previasExamen:[],
-            previasCurso:[],
-        },
-    },
-    creditosPorArea: new Map(["creditosGlobal",280],["cienciasDeLaIngenieria", 50],
-                            ["cienciasBasicas",170],["areaDeFormacionTecnologica",40])
+    creditosPorArea: new Map([["creditosGlobal",280],["creditosCienciasDeLaIngenieria", 50],
+        ["creditosCienciasBasicas",170],["creditosAreaDeFormacionTecnologica",40]])
     },   
 ]
 
-matematicas.forEach(mat=>{materiasMap.set(mat.id, mat)});
-fisica.forEach(mat=>{materiasMap.set(mat.id, mat)});
-quimica.forEach(mat=>{materiasMap.set(mat.id,mat)})
+//==============
+//  PROBLEMA
+//==============
+//Hay materias repetidas con el mismo id. esto puede dar problemas 
+const repetidasId=new Set();
+const repetidasNombre=new Set();
+matematicas.forEach(mat=>agregarMapYRepetidas(mat));
+fisica.forEach(mat=>agregarMapYRepetidas(mat));
+quimica.forEach(mat=>agregarMapYRepetidas(mat))
+computacionCientifica.forEach(mat=>{materiasMap.set(mat.id,mat)})
+modeladoFisicoMatematico.forEach(mat=>agregarMapYRepetidas(mat))
+actividadesComplementarias.forEach(mat=>agregarMapYRepetidas(mat))
+ingenieriaYSociedad.forEach(mat=>agregarMapYRepetidas(mat))
+areaDeFormacionTecnologica.forEach(mat=>agregarMapYRepetidas(mat))
+Talleres.forEach(mat=>agregarMapYRepetidas(mat))
+pasantia.forEach(mat=>agregarMapYRepetidas(mat))
+proyectoFinal.forEach(mat=>agregarMapYRepetidas(mat))
+
+function agregarMapYRepetidas(mat){
+    if(materiasMap.has(mat.id)){
+        repetidasId.add(mat.id);
+        repetidasNombre.add(mat.nombre);
+    }else{
+        materiasMap.set(mat.id,mat)
+    }
+}

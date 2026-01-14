@@ -18,10 +18,11 @@ body {
   display: inline-block;
   height:fit-content;
   width:fit-content;
+  vertical-align:top;
   margin: 5px;
   padding: 5px;
   border: 1px solid black;
-  background-color: rgba(35, 58, 120, 0.943);
+  background-color: rgba(38, 73, 171, 0.943);
   border-radius: 10px;
 }
 

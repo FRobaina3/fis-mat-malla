@@ -1,9 +1,8 @@
 
 
 function imprimir(materia,contenedor){
-  contenedor.innerHTML+="<div><button class='"+materia.id+" "+contenedor.id+" noDisponible' onclick=cambiarEstado('"+materia.id+"')>" 
- + materia.nombre + "  (" +materia.creditos +")" + "</button></div>";
-  
+  contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
+  onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
 }
 
 //Cambia la materia de disponible a no disponible si siono=1, si es =0 la deshabilita. No controla si es valido
@@ -73,6 +72,21 @@ function conjuntoDePreviasAprobado(materia){
   }else{ return true;}
 }
 
+function creditosPorAreaAprobados(previa){
+  let aprobo=true;
+  for(const [area, creditos] of previa.creditosPorArea){
+    // const elem = document.getElementById(area);
+     //console.log(area);
+     if(!area){
+      console.log(previa.nombre);
+     }
+
+    let credActual=Number(document.getElementById(area).dataset.creditos);
+    aprobo=aprobo && (credActual>=creditos);
+  }
+  return aprobo;
+}
+
 function disponible(materiaId){
   let materia=materiasMap.get(materiaId);
   let res=true;
@@ -90,6 +104,8 @@ function disponible(materiaId){
   if(materia.condicionesPrevias){
     res=res && conjuntoDePreviasAprobado(materia);
   }
+  res=res && creditosPorAreaAprobados(materia);
+
   return res;
 }
 //Esta funcionaba
@@ -174,18 +190,72 @@ function sumaCreditosSimultaneo(){
   // }
   // document.getElementById("creditosGlobal").innerText = "Creditos:" + sum;
 
-  //este metodo suma repetido al global
+  //este metodo suma los creditos q le aparecen a la derecha cuando esta impreso
   let aprobadas=document.getElementsByClassName("examenAprobado");
   let sum=0;
-  for(const apr of aprobadas){
-    let materia=materiasMap.get(apr.classList[0]);
-    sum=sum+materia.creditos;
+  let setTodosGruposYSub=new Set(["creditosGlobal","creditosCienciasBasicas","creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia"
+    ,"creditosCienciasDeLaIngenieria","creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosContenidosComplementarios",
+    "creditosActividadesComplementarias","creditosIngenieriaYSociedad","creditosIngenieriaAplicada", "creditosAreaDeFormacionTecnologica",
+    "creditosTalleres","creditosPasantia","creditosProyectoFinal"
+  ])
+  let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria",
+    "creditosContenidosComplementarios","creditosIngenieriaAplicada"]);
+  let setSub=new Set(["creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia",
+    "creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosActividadesComplementarias",
+    "creditosIngenieriaYSociedad", "creditosAreaDeFormacionTecnologica","creditosTalleres","creditosPasantia","creditosProyectoFinal"
+  ])
+  let mapSubAGrupo=new Map([["creditosmatematicas","creditosCienciasBasicas"],["creditosfisica","creditosCienciasBasicas"], 
+    ["creditosquimica","creditosCienciasBasicas"],["creditosbiologia","creditosCienciasBasicas"],
+    ["creditosComputacionCientifica","creditosCienciasDeLaIngenieria"],["creditosModeladoFiscoMatematico","creditosCienciasDeLaIngenieria"],
+    ["creditosActividadesComplementarias","creditosContenidosComplementarios"], ["creditosIngenieriaYSociedad","creditosContenidosComplementarios"],
+    ["creditosAreaDeFormacionTecnologica","creditosIngenieriaAplicada"],["creditosTalleres","creditosIngenieriaAplicada"],
+    ["creditosPasantia","creditosIngenieriaAplicada"],["creditosProyectoFinal","creditosIngenieriaAplicada"]
+  ]);
+  //resetea contador de creditos visible
+  for(const grp of setTodosGruposYSub){
+    document.getElementById(grp).dataset.creditos="0";
+    if(!grp){
+      console.log("no hay grp");
+    }
+    console.log(document.getElementById(grp).dataset.creditos);
   }
-  document.getElementById("creditosGlobal").innerText = "Creditos:" + sum;
-
-
+  //suma en el contador de creditos invisible (data-creditos), de los subgrupos y del total global
+  for(const apr of aprobadas){
+    let creditos=Number(apr.dataset.creditos);
+    sum=sum+creditos;
+    let subgrupo=apr.classList[1];
+    let creditosSubgrupoHtml=document.getElementById("creditos"+subgrupo);
+    console.log(`${subgrupo}`);
+    console.log(creditosSubgrupoHtml);
+    let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
+    let sumSub=credActualSub+creditos;
+    creditosSubgrupoHtml.dataset.creditos=sumSub;
+    //creditosSubgrupoHtml.innerText="Creditos: " + sumSub ;
+  }
+  //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
+  for(const grp of setTodosGruposYSub){
+    let aux=document.getElementById(grp);
+    aux.innerText="Creditos: " +aux.dataset.creditos;
+  }
+  for(const subgrp of setSub){
+    let subHtml=document.getElementById(subgrp);
+    let creditosSub=Number(subHtml.dataset.creditos);
+    let groupHtml=document.getElementById(mapSubAGrupo.get(subgrp));
+    let creditosGroup=Number(groupHtml.dataset.creditos);
+    groupHtml.dataset.creditos=creditosGroup+creditosSub;
+  }
+  let creditosGlobalHtml=document.getElementById("creditosGlobal");
+  // creditosGlobalHtml.innerText = "Creditos:" + sum;
+  creditosGlobalHtml.dataset.creditos = sum;
+  
+  //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
+  for(const grp of setTodosGruposYSub){
+    let aux=document.getElementById(grp);
+    aux.innerText="Creditos: " +aux.dataset.creditos;
+  }
 
 }
+
 
 
 function cambiarEstado(materiaId){
@@ -205,47 +275,45 @@ function cambiarEstado(materiaId){
 let creditosGlobal=0;
 let contenedorHtml = document.getElementById("matematicas");
 matematicas.forEach(mat=> imprimir(mat,contenedorHtml));
+
 contenedorHtml=document.getElementById("fisica");
 fisica.forEach(mat=>imprimir(mat,contenedorHtml));
 
+contenedorHtml=document.getElementById("quimica");
+quimica.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("ComputacionCientifica");
+computacionCientifica.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("ModeladoFiscoMatematico");
+modeladoFisicoMatematico.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("ActividadesComplementarias");
+actividadesComplementarias.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("IngenieriaYSociedad");
+ingenieriaYSociedad.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("AreaDeFormacionTecnologica");
+areaDeFormacionTecnologica.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("Talleres");
+Talleres.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("Pasantia");
+pasantia.forEach(mat=>imprimir(mat,contenedorHtml));
+
+contenedorHtml=document.getElementById("ProyectoFinal");
+proyectoFinal.forEach(mat=>imprimir(mat,contenedorHtml));
+
+
+contenedorHtml=document.getElementById("repetidasId");
+
+// repetidasId.forEach(mat=>{imprimirRepetidas(mat,contenedorHtml)});
+// repetidasNombre.forEach(mat=>{imprimirRepetidas(mat,contenedorHtml)});
+// function imprimirRepetidas(materia,contenedor){
+//   contenedor.innerHTML+="<div><p>" + materia + "</p></div>";
+// }
+
+
 actualizarDisponibles();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const contenedor = document.getElementById("matematicas");
-// matematicas.forEach(matematicas => {
-//   const button= document.createElement("button");
-//   button.textContent = matematicas.nombre ;
-//   contenedor.appendChild(button);
-// });
-
-
