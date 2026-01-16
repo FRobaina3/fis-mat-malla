@@ -75,12 +75,6 @@ function conjuntoDePreviasAprobado(materia){
 function creditosPorAreaAprobados(previa){
   let aprobo=true;
   for(const [area, creditos] of previa.creditosPorArea){
-    // const elem = document.getElementById(area);
-     //console.log(area);
-     if(!area){
-      console.log(previa.nombre);
-     }
-
     let credActual=Number(document.getElementById(area).dataset.creditos);
     aprobo=aprobo && (credActual>=creditos);
   }
@@ -108,59 +102,7 @@ function disponible(materiaId){
 
   return res;
 }
-//Esta funcionaba
-// function disponible(materiaId){
-//   let materia=materiasMap.get(materiaId);
-//   let res=true;
-//   //Se puede optimizar de for a while (res==true)
-//   for(let i=0;i<materia.previasCurso.length;i++){ //ojo con esto no se si va hasta donde tiene que ir
 
-//     let previa=materia.previasCurso[i];
-//     if(typeof previa=== "string"){
-
-//       let preCList=document.getElementsByClassName(materia.previasCurso[i]);
-//       if(preCList.length>0){
-//         let preC=preCList[0];
-//         res=res && (preC.classList.contains("cursoAprobado") || preC.classList.contains("examenAprobado"));
-//       }
-
-//     }else if(previa instanceof Set){ 
-
-//       let unaPreviaAlcanza=false;
-//       for(const opcionPrev of previa){
-//         let opcionPreCList=document.getElementsByClassName(opcionPrev);
-//         let opcionPreC=opcionPreCList[0];
-//         unaPreviaAlcanza = unaPreviaAlcanza || opcionPreC.classList.contains("cursoAprobado") || opcionPreC.classList.contains("examenAprobado");
-//       };
-//       res=res && unaPreviaAlcanza;
-
-//     }
-//   };
-
-//   for(let i=0;i<materia.previasExamen.length;i++){ //ojo con esto no se si va hasta donde tiene que ir
-//     let previa=materia.previasExamen[i];
-//     if(typeof previa==="string"){
-
-//       let preEList=document.getElementsByClassName(materia.previasExamen[i]);
-//       if(preEList.length>0){
-//         let preE=preEList[0];
-//         res=res && preE.classList.contains("examenAprobado");     
-//       }
-
-//     }else if(previa instanceof Set){
-
-//       let unaPreviaAlcanza=false;
-//       for(const opcionPrev of previa){
-//         let opcionPreEList=document.getElementsByClassName(opcionPrev);
-//         let opcionPreE=opcionPreEList[0];
-//         unaPreviaAlcanza = unaPreviaAlcanza || opcionPreE.classList.contains("examenAprobado");
-//       };
-//       res=res && unaPreviaAlcanza;
-
-//     }
-//   };
-//   return res;
-// }
 
 //O(n^2) se puede optimizar
 function actualizarDisponibles(){
@@ -170,6 +112,44 @@ function actualizarDisponibles(){
    }else{
     habilitar(mat.id,0);
    }
+  })
+}
+
+function alcanzaMinimo(sub){
+  let subhtml=document.getElementById(sub+"grupo");
+  let creditosSubgrupoHtml=document.getElementById(sub)
+  let minimo=creditosSubgrupoHtml.dataset.mincreditos;
+  let creditosActual=Number(creditosSubgrupoHtml.dataset.creditos)
+  if(creditosActual>=minimo){
+    if(subhtml && subhtml.classList.contains("lista-materias")){
+      subhtml.classList.remove("lista-materias");
+      subhtml.classList.add("lista-materias-aprobadas")   
+    }
+  }else{
+    if(subhtml && subhtml.classList.contains("lista-materias-aprobadas")){
+      subhtml.classList.add("lista-materias");
+      subhtml.classList.remove("lista-materias-aprobadas")
+    }
+  }
+}
+
+function minimosAlcazados(){
+  setSub.forEach(sub=>{
+  let subhtml=document.getElementById(sub+"grupo");
+  let creditosSubgrupoHtml=document.getElementById(sub)
+  let minimo=creditosSubgrupoHtml.dataset.mincreditos;
+  let creditosActual=Number(creditosSubgrupoHtml.dataset.creditos)
+  if(creditosActual>=minimo){
+    if(subhtml && subhtml.classList.contains("lista-materias")){
+      subhtml.classList.remove("lista-materias");
+      subhtml.classList.add("lista-materias-aprobadas")   
+    }
+  }else{
+    if(subhtml && subhtml.classList.contains("lista-materias-aprobadas")){
+      subhtml.classList.add("lista-materias");
+      subhtml.classList.remove("lista-materias-aprobadas")
+    }
+  }
   })
 }
 //NO PUEDO SUMAR UNA VEZ POR MATERIA. HAY ALGUNAS QUE SUMAN REPARTEN SU CANTIDAD TOTAL DE CREDITOS ENTRE LOS GRUPOS COMO SeyS
@@ -193,31 +173,9 @@ function sumaCreditosSimultaneo(){
   //este metodo suma los creditos q le aparecen a la derecha cuando esta impreso
   let aprobadas=document.getElementsByClassName("examenAprobado");
   let sum=0;
-  let setTodosGruposYSub=new Set(["creditosGlobal","creditosCienciasBasicas","creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia"
-    ,"creditosCienciasDeLaIngenieria","creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosContenidosComplementarios",
-    "creditosActividadesComplementarias","creditosIngenieriaYSociedad","creditosIngenieriaAplicada", "creditosAreaDeFormacionTecnologica",
-    "creditosTalleres","creditosPasantia","creditosProyectoFinal"
-  ])
-  let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria",
-    "creditosContenidosComplementarios","creditosIngenieriaAplicada"]);
-  let setSub=new Set(["creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia",
-    "creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosActividadesComplementarias",
-    "creditosIngenieriaYSociedad", "creditosAreaDeFormacionTecnologica","creditosTalleres","creditosPasantia","creditosProyectoFinal"
-  ])
-  let mapSubAGrupo=new Map([["creditosmatematicas","creditosCienciasBasicas"],["creditosfisica","creditosCienciasBasicas"], 
-    ["creditosquimica","creditosCienciasBasicas"],["creditosbiologia","creditosCienciasBasicas"],
-    ["creditosComputacionCientifica","creditosCienciasDeLaIngenieria"],["creditosModeladoFiscoMatematico","creditosCienciasDeLaIngenieria"],
-    ["creditosActividadesComplementarias","creditosContenidosComplementarios"], ["creditosIngenieriaYSociedad","creditosContenidosComplementarios"],
-    ["creditosAreaDeFormacionTecnologica","creditosIngenieriaAplicada"],["creditosTalleres","creditosIngenieriaAplicada"],
-    ["creditosPasantia","creditosIngenieriaAplicada"],["creditosProyectoFinal","creditosIngenieriaAplicada"]
-  ]);
   //resetea contador de creditos visible
   for(const grp of setTodosGruposYSub){
     document.getElementById(grp).dataset.creditos="0";
-    if(!grp){
-      console.log("no hay grp");
-    }
-    console.log(document.getElementById(grp).dataset.creditos);
   }
   //suma en el contador de creditos invisible (data-creditos), de los subgrupos y del total global
   for(const apr of aprobadas){
@@ -225,8 +183,6 @@ function sumaCreditosSimultaneo(){
     sum=sum+creditos;
     let subgrupo=apr.classList[1];
     let creditosSubgrupoHtml=document.getElementById("creditos"+subgrupo);
-    console.log(`${subgrupo}`);
-    console.log(creditosSubgrupoHtml);
     let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
     let sumSub=credActualSub+creditos;
     creditosSubgrupoHtml.dataset.creditos=sumSub;
@@ -253,6 +209,10 @@ function sumaCreditosSimultaneo(){
     let aux=document.getElementById(grp);
     aux.innerText="Creditos: " +aux.dataset.creditos;
   }
+
+  //Reviso si se alcanzan los minimos
+  minimosAlcazados();
+  
 
 }
 
@@ -317,3 +277,10 @@ contenedorHtml=document.getElementById("repetidasId");
 
 
 actualizarDisponibles();
+// let elpijamate=document.getElementById("creditosmatematicaslista-materias");
+// let laotraoija=document.getElementById("creditosmatematicas")
+// console.log(laotraoija.dataset.creditos);
+// console.log(laotraoija.dataset.mincreditos);
+
+// elpijamate.classList.add("lista-materias-aprobadas")
+// elpijamate.classList.remove("lista-materias")

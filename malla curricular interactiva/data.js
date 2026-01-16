@@ -125,7 +125,7 @@ const fisica=[
     // creditosPorArea: new Map()
     // },
     {id:"F1", //1151
-    nombre:"Fiscia 1",
+    nombre:"Fisica 1",
     creditos:10,
     previasExamen:[],
     previasCurso:[],
@@ -188,7 +188,7 @@ const fisica=[
     creditosPorArea: new Map()
     },
     {id:"MecNew", //1122
-    nombre:"Mecanica Newtonianan",
+    nombre:"Mecanica Newtoniana",
     creditos:10,
     previasExamen:["GAL1","CDIV","F1"],
     previasCurso:["CDIVV"],
@@ -229,7 +229,7 @@ const fisica=[
     creditosPorArea: new Map([["creditosfisica",60], ["creditosmatematicas", 60]]) //TODAVIA NO CONTROLO CREDITOS
     }, 
     {id:"ProCuIn", //1158
-    nombre:"Procesamiento Cunatico de la Informacion",
+    nombre:"Procesamiento Cuantico de la Informacion",
     creditos:10,
     previasExamen:["CDIVV", "PyE", "GAL2"],
     previasCurso:[],
@@ -303,7 +303,7 @@ const quimica=[
     {id:"PQuimGen", //1620
     nombre:"Principios de Quimica General",
     creditos:8,
-    previasExamen:["no existe en bedelias"], //NO APARECE EN EL SISTEMA DE PREVIAS ESTA MATERIA
+    previasExamen:[], 
     previasCurso:[],
     creditosPorArea: new Map()
     }     
@@ -818,7 +818,7 @@ const areaDeFormacionTecnologica=[
     creditosPorArea: new Map()
     },
     {id:"PDSA",//5839
-    nombre:"Procesamiento di gital de señales de audio",
+    nombre:"Procesamiento digital de señales de audio",
     creditos:8,
     previasExamen:["P1","seys"],
     previasCurso:[],
@@ -1326,10 +1326,8 @@ const proyectoFinal=[
     },   
 ]
 
-//==============
-//  PROBLEMA
-//==============
-//Hay materias repetidas con el mismo id. esto puede dar problemas 
+
+//Hay materias repetidas con el mismo id. en materiasMap, se guarda una unica aparicion. 
 const repetidasId=new Set();
 const repetidasNombre=new Set();
 matematicas.forEach(mat=>agregarMapYRepetidas(mat));
@@ -1352,3 +1350,21 @@ function agregarMapYRepetidas(mat){
         materiasMap.set(mat.id,mat)
     }
 }
+  let setTodosGruposYSub=new Set(["creditosGlobal","creditosCienciasBasicas","creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia"
+    ,"creditosCienciasDeLaIngenieria","creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosContenidosComplementarios",
+    "creditosActividadesComplementarias","creditosIngenieriaYSociedad","creditosIngenieriaAplicada", "creditosAreaDeFormacionTecnologica",
+    "creditosTalleres","creditosPasantia","creditosProyectoFinal"
+  ])
+  let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria",
+    "creditosContenidosComplementarios","creditosIngenieriaAplicada"]);
+  let setSub=new Set(["creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia",
+    "creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosActividadesComplementarias",
+    "creditosIngenieriaYSociedad", "creditosAreaDeFormacionTecnologica","creditosTalleres","creditosPasantia","creditosProyectoFinal"
+  ])
+  let mapSubAGrupo=new Map([["creditosmatematicas","creditosCienciasBasicas"],["creditosfisica","creditosCienciasBasicas"], 
+    ["creditosquimica","creditosCienciasBasicas"],["creditosbiologia","creditosCienciasBasicas"],
+    ["creditosComputacionCientifica","creditosCienciasDeLaIngenieria"],["creditosModeladoFiscoMatematico","creditosCienciasDeLaIngenieria"],
+    ["creditosActividadesComplementarias","creditosContenidosComplementarios"], ["creditosIngenieriaYSociedad","creditosContenidosComplementarios"],
+    ["creditosAreaDeFormacionTecnologica","creditosIngenieriaAplicada"],["creditosTalleres","creditosIngenieriaAplicada"],
+    ["creditosPasantia","creditosIngenieriaAplicada"],["creditosProyectoFinal","creditosIngenieriaAplicada"]
+  ]);

@@ -1,17 +1,116 @@
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: rgb(25, 1, 51);
+
 }
 
+.marco-superior{
+    height:100%;
+    width:99%;
+    box-sizing: border-box;
+    background-color: rgb(11, 31, 130);
+    border: 3px solid rgb(214, 255, 254);
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+}
+/*rgb(23, 36, 105) rgb(14, 119, 184)*/
+h1{
+    color:rgb(255, 255, 255);
+    font-size:xx-large;
+    font-weight:700;
+    text-align: center;
+}
+
+p{
+    color:rgb(255, 255, 255);
+    font-size:medium;
+    font-weight:500;
+    padding:1px;
+    margin:1px
+}
+button{
+    cursor: pointer;
+}
+
+.dem-colores{
+    margin:10px;
+    box-sizing: border-box;
+}
+.ej-noDisponoble{
+    margin: 5px;
+    padding: 5px;
+    height:fit-content;
+    width:fit-content;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: rgb(44, 20, 20);
+    border: 2px solid rgb(133, 128, 128);
+}
+.ej-disponible{
+    margin: 5px;
+    padding: 5px;
+    height:fit-content;
+    width:fit-content;
+    display: inline-block;
+    border-radius: 10px;
+    border: 2px solid rgb(227, 254, 250);
+    background-color: rgb(188, 0, 0);
+}
+.ej-cursoAprobado{
+    margin: 5px;
+    padding: 5px;
+    height:fit-content;
+    width:fit-content;
+    display: inline-block;
+    border-radius: 10px;
+    border: 2px solid rgb(236, 255, 255);
+    background-color: rgb(2, 61, 151);
+}
+.ej-examenAprobado{
+    margin: 5px;
+    padding: 5px;
+    height:fit-content;
+    width:fit-content;
+    display: inline-block;
+    border-radius: 10px;
+    border: 2px solid rgb(233, 255, 255);
+    background-color: rgb(10, 107, 16);
+}
+.ej-minimoAlcanzado{
+    margin: 5px;
+    padding: 5px;
+    height:fit-content;
+    width:fit-content;
+    display: inline-block;
+    border-radius: 10px;
+    border: 4px solid rgb(57, 214, 22);
+    background-color: rgb(1, 5, 1);
+}
 
 .grupo{
   margin: 5px;
   padding: 5px;
-  border: 2px solid black;
+  border: 3px solid rgb(214, 255, 254);
   height:fit-content;
-  width:fit-content;
-  background-color: rgb(61, 124, 142);
+  width:99%;
+  box-sizing: border-box;
+  background-color: rgb(1, 19, 36);/*rgb(23, 36, 105)*/
   border-radius: 10px;
+    font-size:large;
+    font-weight:500;
+}
+.grupo-aprobado{
+    margin: 5px;
+    padding: 5px;
+    border: 3px solid rgb(31, 234, 45);
+    height:fit-content;
+    width:99%;
+    box-sizing: border-box;
+    background-color: rgb(8, 117, 10);
+    border-radius: 10px;
+    font-size:large;
+    font-weight:500;
 }
 
 .lista-materias {
@@ -21,77 +120,94 @@ body {
   vertical-align:top;
   margin: 5px;
   padding: 5px;
-  border: 1px solid black;
-  background-color: rgba(38, 73, 171, 0.943);
+  border: 2px solid rgb(214, 255, 254);
+  background-color: rgb(10, 29, 54);
   border-radius: 10px;
+  color:antiquewhite
+}
+.lista-materias-aprobadas {
+  display: inline-block;
+  height:fit-content;
+  width:fit-content;
+  vertical-align:top;
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid rgb(31, 234, 45);
+  background-color: rgb(5, 27, 13);
+  border-radius: 10px;
+  color:rgb(247, 246, 245)
 }
 
 
-.materia{
+/* .materia{
     color:black;
-    font-size:medium;
-    font-weight:bold;
+    font-size:small;
+    font-weight:normal;
     text-align:center;
     height:fit-content;
     width:fit-content;
     margin: 10px;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid rgb(150, 146, 146);
 
-}
+} */
 
 button.noDisponible{
-    color:rgb(0, 0, 0);
+    color:rgb(210, 201, 173);
+    background-color: rgb(44, 20, 20);
+    border: 2px solid rgb(133, 128, 128);
+
     font-size:medium;
-    font-weight:bold;
+    font-weight:500;
     text-align:center;
     height:fit-content;
     width:fit-content;
+
     margin: 5px;
     padding: 5px;
-    border: 2px solid black;
-    background-color: rgb(139, 59, 59);
     border-radius: 10px;
 }
 
 button.disponible{
-    color:rgb(0, 0, 0);
+    color:rgb(242, 253, 253);
+    border: 2px solid rgb(227, 254, 250);
+    background-color: rgb(188, 0, 0);
+
     font-size:medium;
-    font-weight:bold;
+    font-weight:500;
     text-align:center;
     height:fit-content;
     width:fit-content;
-    margin: 5px;
+
     padding: 5px;
-    border: 2px solid black;
-    background-color: rgb(231, 82, 82);
+    margin: 5px;
     border-radius: 10px;
 }
 
 button.cursoAprobado{
-    color:rgb(0, 0, 0);
+    color:rgb(255, 251, 243);
+    border: 2px solid rgb(236, 255, 255);
+    background-color: rgb(2, 61, 151);
     font-size:medium;
-    font-weight:bold;
+    font-weight:500;
     text-align:center;
     height:fit-content;
     width:fit-content;
     margin: 5px;
     padding: 5px;
-    border: 2px solid black;
-    background-color: rgb(86, 145, 232);
     border-radius: 10px;
 }
 
 button.examenAprobado{
-    color:rgb(0, 0, 0);
+    color:rgb(246, 255, 255);
+    border: 2px solid rgb(233, 255, 255);
+    background-color: rgb(10, 107, 16);
     font-size:medium;
-    font-weight:bold;
+    font-weight:500;
     text-align:center;
     height:fit-content;
     width:fit-content;
     margin: 5px;
     padding: 5px;
-    border: 2px solid black;
-    background-color: rgb(13, 165, 36);
     border-radius: 10px;
 }
