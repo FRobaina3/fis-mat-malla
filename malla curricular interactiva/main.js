@@ -5,6 +5,11 @@ function imprimir(materia,contenedor){
   onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
 }
 
+function desplegar(){
+  let textList=document.getElementsByClassName("aclaraciones");
+  Array.from(textList).forEach(t=>{t.classList.toggle("oculto")})
+}
+
 //Cambia la materia de disponible a no disponible si siono=1, si es =0 la deshabilita. No controla si es valido
 function habilitar(materiaId,siono){
   let matList=document.getElementsByClassName(materiaId);
@@ -133,7 +138,7 @@ function alcanzaMinimo(sub){
   }
 }
 
-function minimosAlcazados(){
+function minimosAlcazadosSub(){
   setSub.forEach(sub=>{
   let subhtml=document.getElementById(sub+"grupo");
   let creditosSubgrupoHtml=document.getElementById(sub)
@@ -151,7 +156,41 @@ function minimosAlcazados(){
     }
   }
   })
+  minimosAlcanzadosGrupo();
+  minimoAlcanzadoGlobal();
 }
+
+function minimosAlcanzadosGrupo(){
+  setGrupos.forEach(grp=>{
+    let grupohtml=document.getElementById(grp+"grupo");
+    let creditosgrphtml=document.getElementById(grp);
+    // console.log(grupohtml);
+    // console.log(creditosgrphtml);
+    let minimo=Number(creditosgrphtml.dataset.mincreditos);
+    let creditosActual= Number(creditosgrphtml.dataset.creditos);
+
+    if(creditosActual>=minimo && grupohtml.classList.contains("grupo")){
+      grupohtml.classList.add("grupo-aprobado");
+      grupohtml.classList.remove("grupo");     
+    }else if(creditosActual<=minimo && grupohtml.classList.contains("grupo-aprobado")){
+      grupohtml.classList.remove("grupo-aprobado");
+      grupohtml.classList.add("grupo");     
+    }
+  })
+}
+function minimoAlcanzadoGlobal(){
+  let globalHtml=document.getElementById("creditosGlobalgrupo");
+  let creditosGlobalHtml=document.getElementById("creditosGlobal");
+  let creditosActual=Number(creditosGlobalHtml.dataset.creditos);
+  if(creditosActual>=450 && globalHtml.classList.contains("marco-superior")){
+    globalHtml.classList.remove("marco-superior");
+    globalHtml.classList.add("marco-superior-aprobado");
+  }else if(creditosActual<=450 && globalHtml.classList.contains("marco-superior-aprobado")){
+    globalHtml.classList.add("marco-superior");
+    globalHtml.classList.remove("marco-superior-aprobado");
+  }       
+}
+
 //NO PUEDO SUMAR UNA VEZ POR MATERIA. HAY ALGUNAS QUE SUMAN REPARTEN SU CANTIDAD TOTAL DE CREDITOS ENTRE LOS GRUPOS COMO SeyS
 //Creo que tengo que sumar cada apariccion de materia aunque este repetido
 function sumaCreditosSimultaneo(){ 
@@ -211,13 +250,10 @@ function sumaCreditosSimultaneo(){
   }
 
   //Reviso si se alcanzan los minimos
-  minimosAlcazados();
+  minimosAlcazadosSub();
   
 
 }
-
-
-
 function cambiarEstado(materiaId){
   const buttonList=document.getElementsByClassName(materiaId);
   for(const btn of buttonList){
@@ -277,10 +313,3 @@ contenedorHtml=document.getElementById("repetidasId");
 
 
 actualizarDisponibles();
-// let elpijamate=document.getElementById("creditosmatematicaslista-materias");
-// let laotraoija=document.getElementById("creditosmatematicas")
-// console.log(laotraoija.dataset.creditos);
-// console.log(laotraoija.dataset.mincreditos);
-
-// elpijamate.classList.add("lista-materias-aprobadas")
-// elpijamate.classList.remove("lista-materias")

@@ -10,11 +10,17 @@ const totalCreditosMap= new Map();
 //previaCurso es la lista de cursos que hay que tener aprobados para poder cursar
 //previasExamen es la lista de examenes que hay que tener aprobados para poder cursar
 
-//==============================
-//  FALTA CONTROLAR LOS CREDITOS
-//===============================
+
+
 const matematicas=[
     //estas previas son para dar el curso (no el examen)
+    {id:"MI", //1061
+    nombre:"Matematica Inicial",
+    creditos:4,
+    previasExamen:[],
+    previasCurso:[],
+    creditosPorArea: new Map()
+    },
     {id:"CDIV", //1061
     nombre:"Calculo DIV",
     creditos:13,
@@ -549,7 +555,7 @@ const modeladoFisicoMatematico=[
     creditosPorArea: new Map([["creditosfisica",15]])
     }, 
     {id:"CompMM1",//1764
-    nombre:"Comporatamiento Mecanico de los Materiales 1",
+    nombre:"Comportamiento Mecanico de los Materiales 1",
     creditos:13,
     previasExamen:[],
     previasCurso:[],
