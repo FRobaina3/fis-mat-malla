@@ -177,7 +177,7 @@ const fisica=[
     //  PROBLEMAS CON ALGUNAS PREVIAS
     //============================
     {id:"FisTer", //1123
-    nombre:"Fisica Termica",
+    nombre:"Física Térmica",
     creditos:10,
     previasExamen:["CDIV","F1"],
     previasCurso:[],
@@ -259,7 +259,7 @@ const fisica=[
     creditosPorArea: new Map()
     }, 
     {id:"FisMod", //1131 o 1159
-    nombre:"Int. a la fisica moderna",
+    nombre:"Int. a la Física Moderna",
     creditos:10,
     previasExamen:["F3"],
     previasCurso:[],
@@ -384,7 +384,7 @@ const computacionCientifica=[
     // }, 
 
     {id:"IntME", //475
-    nombre:"Int. a los Metodos Estadisticos",
+    nombre:"Int. a los Métodos Estadísticos",
     creditos:10,
     previasExamen:["PyE", "P1"],
     previasCurso:[],
@@ -420,7 +420,7 @@ const computacionCientifica=[
     creditosPorArea: new Map()
     }, 
     {id:"IIO", //1650 o 1610
-    nombre:"Int. Investigacion de Operaciones",
+    nombre:"Int. Investigación de Operaciones",
     creditos:10,
     previasExamen:["CDIV","CDIVV","GAL1", "GAL2", "PyE"],
     previasCurso:[],
@@ -476,45 +476,17 @@ const modeladoFisicoMatematico=[
     {id:"Elas", //2366
     nombre:"Elasticidad",
     creditos:10,
-    previasExamen:[],
+    previasExamen:["CV","MecNew"],
     previasCurso:[],
     condicionesPrevias:{
         cond1:{
-            previasExamen:["CV"],
-            previasCurso:[],
+            previasExamen:[],
+            previasCurso:["CompMM1"],
         },
         cond2:{
-            previasExamen:["CV","MecNew"],
-            previasCurso:["CompMM1"],
-        },
-        cond3:{
-            previasExamen:["CV"],
-            previasCurso:["ResMat1"],
-        },
-        cond4:{
             previasExamen:[],
-            previasCurso:["ResMat1", "CompMM1"],
-        },
-        cond5:{
-            previasExamen:["CV"],
-            previasCurso:["CompMM1"], 
-        },
-        cond6:{
-            previasExamen:["MecNew"],
-            previasCurso:["CompMM1"],
-        },
-        cond7:{
-            previasExamen:["MecNew","CV"],
-            previasCurso:[],
-        },       
-        cond8:{
-            previasExamen:["MecNew"],
-            previasCurso:[],
-        },       
-        cond9:{
-            previasExamen:["MecNew"],
-            previasCurso:["ResMat1"], 
-        },        
+            previasCurso:["ResMat1"],
+        },     
 
     }, 
     creditosPorArea: new Map()
@@ -548,7 +520,7 @@ const modeladoFisicoMatematico=[
     creditosPorArea: new Map()
     },
     {id:"teocirc", //1456
-    nombre:"Teoria de circuitos",
+    nombre:"Teoría de Circuitos",
     creditos:8,
     previasExamen:["CDIVV","F1","CDIV","GAL1"],
     previasCurso:["F3"],

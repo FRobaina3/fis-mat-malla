@@ -1,11 +1,11 @@
 
-
+//
 function imprimir(materia,contenedor){
   contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
   onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
 }
 
-function desplegar(){
+function desplegarAclaraciones(){
   let textList=document.getElementsByClassName("aclaraciones");
   Array.from(textList).forEach(t=>{t.classList.toggle("oculto")})
 }
