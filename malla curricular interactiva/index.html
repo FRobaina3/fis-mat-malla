@@ -14,69 +14,89 @@
         <div class="ej-examenAprobado"><p>Materia con Examen aprobado</p></div>   
         <div class="ej-minimoAlcanzado"><p>Mínimo alcanzado</p></div> 
     </div> -->
+
     <div class="contenedor-btn-aclaraciones">
         <button class="btn-aclaraciones" onclick="desplegarAclaraciones()">?</button>
     </div>
-    <div class="oculto aclaraciones aclaraciones-conteiner" id="aclaraciones">
-        <div class="oculto aclaraciones dem-colores" >
+    <!-- <div class="aclaraciones-overlay">
+        <div class="aclaraciones-conteiner">
+            Contenido acá
+        </div>
+    </div> -->
+
+    <div class="oculto aclaraciones aclaraciones-overlay" id="aclaraciones">
+        <div class="oculto aclaraciones aclaraciones-conteiner dem-colores" >
+            <p>Seleccione las materias en habilitadas para aprobarlas y exonerarlas. Se habilitaran nuevas 
+                materias a medida que consigas todas sus previas.
+            </p>
             <p>Código de colores:</p>
             <div class="ej-noDisponible"><p>Materia no habilitada</p></div>    
             <div class="ej-disponible"> <p>Materia habilitada</p></div>    
             <div class="ej-cursoAprobado"><p>Materia con Curso Aprobado</p></div>    
             <div class="ej-examenAprobado"><p>Materia con Examen aprobado</p></div>   
             <div class="ej-minimoAlcanzado"><p>Mínimo alcanzado</p></div> 
+            <p>Aclaraciones: </p>
             <p>
                 La página fue hecha en enero de 2026 con las materias que estaban en bedelías en el momento.  
-                Bedelías siguen agregando materias por lo que con el paso del tiempo las materias en esta página quedarán desactualizadas.  <!-- Cambiados: "Bedelias" a "Bedelías", "paguina" a "página", "quedaran" a "quedarán" -->
+                Bedelías siguen agregando materias por lo que con el paso del tiempo las materias en esta página quedarán desactualizadas.  
                 
-                Las materias que están en la página son la versión más reciente y que todavía se sigue dando. Si hiciste una versión vieja de un curso  <!-- Cambiados: "estan" a "están", "todvia" a "todavía", "hicise" a "hiciste" -->
-                te van a quedar mal los créditos (ej: Métodos Numéricos pasó de tener 8 a 10 créditos, acá solo está la versión de 10.)  <!-- Cambiados: "creditos" a "créditos", "ej:" a "ej.", "Metodos" a "Métodos", "paso" a "pasó", "aca" a "acá" -->
+                Las materias que están en la página son la versión más reciente y que todavía se sigue dando. Si hiciste una versión vieja de un curso  
+                te van a quedar mal los créditos (ej: Métodos Numéricos pasó de tener 8 a 10 créditos, acá solo está la versión de 10.)  
                 
-                No fueron ingresadas muchas materias que están disponibles en bedelías pero que se hacían en otras facultades.  <!-- Cambiados: "estan" a "están", "bedelias" a "bedelías", "hacian" a "hacían" -->
+                No fueron ingresadas muchas materias que están disponibles en bedelías pero que se hacían en otras facultades.  
                 
-                El sistema solo controla si tienes las prerequisitos necesarias para dar el curso, pero no para dar el examen.  <!-- Cambiados: "tenes" a "tienes", "previas" a "prerrequisitos" (más preciso, opcional) -->
+                El sistema solo controla si tienes las prerequisitos necesarias para dar el curso, pero no para dar el examen.  
             </p>
         </div>
     </div>
     <div id="creditosGlobalgrupo" class="marco-superior">
         <h1>Ing. Físico-Matemático</h1>
-        <p id="creditosGlobal" data-creditos="0" data-minCreditos="450">Creditos:</p>
+        <h3 id="creditosGlobal" data-creditos="0" data-minCreditos="450">Creditos:</h3>
         <p> Mínimo 450</p>
+        <div class="opciones-conteiner">
+            <!-- <button class="opciones"> Todas las materias</button> -->
+        </div>
     </div>
+<div>
+    <p>Esta página es un aporte estudiantil no oficial. Sirve de guía pero NO es un mecanismo válido para hacer tu plan de carrera </p>
+    <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">
+        Crea tu perfil oficial usando el instructivo disponible en la página del EVA.
+    </a>
+</div>
 <div id="creditosCienciasBasicasgrupo" class="grupo"> 
-        <p>Ciencias Básicas</p>  <!-- Cambiado: "Basicas" a "Básicas" -->
+        <p>Ciencias Básicas</p>  
         <p id="creditosCienciasBasicas" data-creditos="0" data-minCreditos="200">Créditos: </p><p>Mínimo 200 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
         <div id="creditosmatematicasgrupo" class="lista-materias"> 
-            <p>Matemáticas</p>  <!-- Cambiado: "Matematicas" a "Matemáticas" -->
+            <p>Matemáticas</p>  
             <p id="creditosmatematicas" data-creditos="0" data-minCreditos="75">Créditos:0 </p><p>Mínimo 75 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
             <div id="matematicas"></div>
         </div>
         <div id="creditosfisicagrupo" class="lista-materias">
-            <p>Física</p>  <!-- Cambiado: "Fisica" a "Física" -->
+            <p>Física</p>  
             <p id="creditosfisica" data-creditos="0" data-minCreditos="75">Créditos: 0 </p><p>Mínimo 75 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
             <div id="fisica"></div>
         </div>
         <div id="creditosquimicagrupo" class="lista-materias">
-            <p>Química</p>  <!-- Cambiado: "Quimica" a "Química" -->
+            <p>Química</p> 
             <p id="creditosquimica" data-creditos="0"data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
             <div id="quimica"></div>
         </div>
         <div id="creditosbiologiagrupo"class="lista-materias">
-            <p>Biología</p>  <!-- Cambiado: "Biologia" a "Biología" -->
+            <p>Biología</p>  
             <p id="creditosbiologia" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
             <div id="biologia"></div>
         </div>
     </div>
     <div id="creditosCienciasDeLaIngenieriagrupo" class="grupo"> 
-        <p>Ciencias de la Ingeniería</p>  <!-- Cambiado: "Ingenieria" a "Ingeniería" -->
+        <p>Ciencias de la Ingeniería</p> 
         <p id="creditosCienciasDeLaIngenieria" data-creditos="0" data-minCreditos="80">Créditos: 0 </p><p>Mínimo 80</p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
         <div id="creditosComputacionCientificagrupo" class="lista-materias">
-            <p>Computación Científica</p>  <!-- Cambiado: "Computacion" a "Computación" -->
+            <p>Computación Científica</p>  
             <p id="creditosComputacionCientifica" data-creditos="0" data-minCreditos="50">Créditos: 0 </p><p>Mínimo 50 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
             <div id="ComputacionCientifica"></div>
         </div>
         <div id="creditosModeladoFiscoMatematicogrupo" class="lista-materias">
-            <p>Modelado Físico-Matemático</p>  <!-- Cambiados: "Fisco" a "Físico", "Matematico" a "Matematico" (agregar guion) -->
+            <p>Modelado Físico-Matemático</p>  
             <p id="creditosModeladoFiscoMatematico" data-creditos="0" data-minCreditos="20">Créditos: 0 </p><p>Mínimo 20 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
             <div id="ModeladoFiscoMatematico"></div>
         </div>

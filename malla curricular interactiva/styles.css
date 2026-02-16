@@ -1,8 +1,39 @@
 body {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background-color: rgb(10, 10, 30); /* Azul oscuro para fondo principal */
-  padding-top:110px;
+  padding-top:150px;
 }
+h1{
+    color:rgb(255, 255, 255);
+    font-size:xx-large;
+    font-weight:700;
+    text-align: center;
+    margin:10px;
+}
+h3{
+    color:rgb(255, 255, 255);
+    font-size:x-large;
+    font-weight:700;
+    text-align:left;
+    margin:5px;
+}
+
+p{
+    color:rgb(255, 255, 255);
+    font-size:medium;
+    font-weight:500;
+    padding:1px;
+    margin:1px
+}
+
+a{
+    color:rgb(237, 218, 9);
+    font-size:medium;
+    font-weight:500;
+    padding:1px;
+    margin:1px
+}
+
 
 .marco-superior{
     position: fixed;
@@ -13,6 +44,7 @@ body {
     background-color: rgb(0, 50, 100); /* Azul más intenso */
     border: 3px solid rgb(0, 150, 200); /* Azul claro */
     padding: 5px;
+    z-index:999;
 }
 .marco-superior-aprobado{
     position: fixed;
@@ -24,24 +56,23 @@ body {
     border: 3px solid rgb(0, 150, 0); /* Verde claro */
     border-radius: 10px;
     padding: 5px;
+    z-index:999;
 }
 
-h1{
-    color:rgb(255, 255, 255);
-    font-size:xx-large;
-    font-weight:700;
-    text-align: center;
-    margin:10px;
-}
+.opciones-conteiner{   
+    display:flex;
+    padding: 5px;
 
-p{
-    color:rgb(255, 255, 255);
+}
+.opciones{
+    border-radius: 10px;
+    border:1px solid rgb(47, 49, 56);
+    background-color: rgb(1, 1, 16);
+    color:rgb(248, 255, 248);
     font-size:medium;
-    font-weight:500;
-    padding:1px;
-    margin:1px
+    margin: 3px;
+    padding: 5px;
 }
-
 
 .contenedor-btn-aclaraciones {
     position: fixed;
@@ -51,14 +82,15 @@ p{
     justify-content: flex-end; /* Alinea el contenido (botón) a la derecha */
     align-items: center; /* Centra verticalmente el contenido */
     margin: 2px;
+    z-index: 2000;;
 }
 .btn-aclaraciones {
     width: 40px; /* Ancho del círculo */
     height: 40px; /* Alto del círculo */
     border-radius: 50%; /* Hace el botón circular */
-    background-color: rgb(255, 191, 0); /* Fondo naranja */
-    border: 2px solid rgb(255, 255, 255); /* Borde blanco */
-    color: black; /* Color del símbolo */
+    background-color: rgba(21, 21, 21, 0.24); /* Fondo naranja */
+    border: 3px solid rgb(231, 231, 231); /* Borde blanco */
+    color: rgb(217, 217, 217); /* Color del símbolo */
     font-size: 20px; /* Tamaño del símbolo */
     font-weight: bold;
     cursor: pointer;
@@ -67,18 +99,27 @@ p{
     justify-content: center;
     margin: 10px;
 }
-.aclaraciones-conteiner{
+.aclaraciones-overlay{
   position: fixed;
-  top: 30px;
-  left: 30px;
-  width: 80%;
-  height: 80%;
-  background: rgb(21, 63, 136);
-  border:2px solid rgb(230, 230, 230);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.589);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index:1000;
 }
+.aclaraciones-conteiner {
+  width: 70vw;
+  height: 80vh;
+
+  background: rgb(81, 81, 81);
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 8px;
+  padding: 20px;
+}
+
 
 
 
@@ -146,6 +187,9 @@ p{
     border: 4px solid rgb(0, 255, 0); /* Verde brillante */
     background-color: rgb(0, 20, 0); /* Verde muy oscuro */
 }
+
+
+
 
 .grupo{
   margin: 8px;
