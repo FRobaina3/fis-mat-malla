@@ -1,6 +1,8 @@
 const estados=["disponible" , "cursoAprobado", "examenAprobado"];
 const materiasMap= new Map();
 const totalCreditosMap= new Map();
+const materiaHabilitaMap=new Map();
+const materiasAprobadasMap= new Map();// tiene la materia y si tiene curso o examen aprobado
 
 //Las previas son para tomar el curso, no para tomar el examen.
 // Hay algunas materia que tienen la condicion no debe tener aprobadas:... estas condiciones no estan tenidas en cuenta
@@ -1328,14 +1330,19 @@ function agregarMapYRepetidas(mat){
         materiasMap.set(mat.id,mat)
     }
 }
-  let setTodosGruposYSub=new Set(["creditosGlobal","creditosCienciasBasicas","creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia"
+
+
+
+let setTodosGruposYSub=new Set(["creditosGlobal","creditosCienciasBasicas","creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia"
     ,"creditosCienciasDeLaIngenieria","creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosContenidosComplementarios",
     "creditosActividadesComplementarias","creditosIngenieriaYSociedad","creditosIngenieriaAplicada", "creditosAreaDeFormacionTecnologica",
-    "creditosTalleres","creditosPasantia","creditosProyectoFinal"
-  ])
-  let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria",
+    "creditosTalleres","creditosPasantia","creditosProyectoFinal"]);
+    
+
+let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria",
     "creditosContenidosComplementarios","creditosIngenieriaAplicada"]);
-  let setSub=new Set(["creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia",
+
+    let setSub=new Set(["creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia",
     "creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosActividadesComplementarias",
     "creditosIngenieriaYSociedad", "creditosAreaDeFormacionTecnologica","creditosTalleres","creditosPasantia","creditosProyectoFinal"
   ])

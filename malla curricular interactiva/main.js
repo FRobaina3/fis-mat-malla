@@ -5,120 +5,135 @@ function imprimir(materia,contenedor){
   onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
 }
 
+function ocultarMostrarClass(clase){
+  lista=getElementsByClassName(clase);
+  lista.forEach(elem=>{elem.classList.toggle("oculto")});
+}
+function ocultarMostrarIdElemento(idElem){
+  lista=getElementsById(idElem);
+  lista.forEach(elem=>{elem.classList.toggle("oculto")});
+}
+
+
+
+
+///============  De aca para abajo funciones viejas  ==================
+
+
 function desplegarAclaraciones(){
   let textList=document.getElementsByClassName("aclaraciones");
   Array.from(textList).forEach(t=>{t.classList.toggle("oculto")})
 }
 
 //Cambia la materia de disponible a no disponible si siono=1, si es =0 la deshabilita. No controla si es valido
-function habilitar(materiaId,siono){
-  let matList=document.getElementsByClassName(materiaId);
-  for(const estado of matList){
-    if(estado.classList.contains("noDisponible") && siono==1){
-      estado.classList.remove("noDisponible");
-      estado.classList.add("disponible");
-    }else if(!estado.classList.contains("noDisponible") && siono==0){
-      estado.classList.remove("disponible" , "cursoAprobado", "examenAprobado");
-      estado.classList.add("noDisponible");    
-    }
-  }
-}
+// function habilitar(materiaId,siono){
+//   let matList=document.getElementsByClassName(materiaId);
+//   for(const estado of matList){
+//     if(estado.classList.contains("noDisponible") && siono==1){
+//       estado.classList.remove("noDisponible");
+//       estado.classList.add("disponible");
+//     }else if(!estado.classList.contains("noDisponible") && siono==0){
+//       estado.classList.remove("disponible" , "cursoAprobado", "examenAprobado");
+//       estado.classList.add("noDisponible");    
+//     }
+//   }
+// }
 
 //validar previas o una previa dentro de un set fue aprobada como examen o curso
-function esPreviaAprobada(examenOCurso,previa){
-  let ret=false;
-  if(typeof previa==="string"){
-    let preList=document.getElementsByClassName(previa);
-    if(preList.length>0){
-      let pre=preList[0];
-      if(examenOCurso==="curso"){
-        ret= (pre.classList.contains("cursoAprobado") || pre.classList.contains("examenAprobado"));        
-      }else if (examenOCurso ==="examen"){
-        ret=  pre.classList.contains("examenAprobado");
-      }
-    }    
-  }else if(previa instanceof Set){ 
-    let unaPreviaAlcanza=false;
-    for(const opcionPrev of previa){
-      let opcionPreList=document.getElementsByClassName(opcionPrev);
-      let opcionPre=opcionPreList[0];
-      if(examenOCurso==="curso"){
-        unaPreviaAlcanza = unaPreviaAlcanza || opcionPre.classList.contains("cursoAprobado") || opcionPre.classList.contains("examenAprobado");
-      }else if(examenOCurso ==="examen"){
-        unaPreviaAlcanza = unaPreviaAlcanza || opcionPre.classList.contains("examenAprobado");
-      }
-    };
-    ret= unaPreviaAlcanza;
-  }
-  return ret;
-}
+// function esPreviaAprobada(examenOCurso,previa){
+//   let ret=false;
+//   if(typeof previa==="string"){
+//     let preList=document.getElementsByClassName(previa);
+//     if(preList.length>0){
+//       let pre=preList[0];
+//       if(examenOCurso==="curso"){
+//         ret= (pre.classList.contains("cursoAprobado") || pre.classList.contains("examenAprobado"));        
+//       }else if (examenOCurso ==="examen"){
+//         ret=  pre.classList.contains("examenAprobado");
+//       }
+//     }    
+//   }else if(previa instanceof Set){ 
+//     let unaPreviaAlcanza=false;
+//     for(const opcionPrev of previa){
+//       let opcionPreList=document.getElementsByClassName(opcionPrev);
+//       let opcionPre=opcionPreList[0];
+//       if(examenOCurso==="curso"){
+//         unaPreviaAlcanza = unaPreviaAlcanza || opcionPre.classList.contains("cursoAprobado") || opcionPre.classList.contains("examenAprobado");
+//       }else if(examenOCurso ==="examen"){
+//         unaPreviaAlcanza = unaPreviaAlcanza || opcionPre.classList.contains("examenAprobado");
+//       }
+//     };
+//     ret= unaPreviaAlcanza;
+//   }
+//   return ret;
+// }
 
 //validar otras condicionesDePrevias, que consiste en validar previas curso y examen
-function conjuntoDePreviasAprobado(materia){
-  let cumpleCualquierCondicion=false;
-  if(materia.condicionesPrevias){
-    for(const cond of Object.values(materia.condicionesPrevias)){
-      let i=0;
-      let cumpleCondicion=true;
-      while(cumpleCondicion==true && i<cond.previasCurso.length){
-        let previaC=cond.previasCurso[i];
-        cumpleCondicion=cumpleCondicion && esPreviaAprobada("curso",previaC);    
-        i++;
-      }
-      i=0;
-      while(cumpleCondicion==true && i<cond.previasExamen.length){
-        let previaE=cond.previasExamen[i];
-        cumpleCondicion=cumpleCondicion && esPreviaAprobada("examen",previaE);
-        i++;
-      }
-      cumpleCualquierCondicion= cumpleCualquierCondicion || cumpleCondicion;
-    }
-    return cumpleCualquierCondicion;
-  }else{ return true;}
-}
+// function conjuntoDePreviasAprobado(materia){
+//   let cumpleCualquierCondicion=false;
+//   if(materia.condicionesPrevias){
+//     for(const cond of Object.values(materia.condicionesPrevias)){
+//       let i=0;
+//       let cumpleCondicion=true;
+//       while(cumpleCondicion==true && i<cond.previasCurso.length){
+//         let previaC=cond.previasCurso[i];
+//         cumpleCondicion=cumpleCondicion && esPreviaAprobada("curso",previaC);    
+//         i++;
+//       }
+//       i=0;
+//       while(cumpleCondicion==true && i<cond.previasExamen.length){
+//         let previaE=cond.previasExamen[i];
+//         cumpleCondicion=cumpleCondicion && esPreviaAprobada("examen",previaE);
+//         i++;
+//       }
+//       cumpleCualquierCondicion= cumpleCualquierCondicion || cumpleCondicion;
+//     }
+//     return cumpleCualquierCondicion;
+//   }else{ return true;}
+// }
 
-function creditosPorAreaAprobados(previa){
-  let aprobo=true;
-  for(const [area, creditos] of previa.creditosPorArea){
-    let credActual=Number(document.getElementById(area).dataset.creditos);
-    aprobo=aprobo && (credActual>=creditos);
-  }
-  return aprobo;
-}
+// function creditosPorAreaAprobados(previa){
+//   let aprobo=true;
+//   for(const [area, creditos] of previa.creditosPorArea){
+//     let credActual=Number(document.getElementById(area).dataset.creditos);
+//     aprobo=aprobo && (credActual>=creditos);
+//   }
+//   return aprobo;
+// }
 
-function disponible(materiaId){
-  let materia=materiasMap.get(materiaId);
-  let res=true;
-  let i=0;
-  while(res==true && i<materia.previasCurso.length){
-    let previaC=materia.previasCurso[i];
-    res=res && esPreviaAprobada("curso", previaC);
-    i++;
-  }
-  while(res==true && i<materia.previasExamen.length){
-    let previaE=materia.previasExamen[i];
-    res=res && esPreviaAprobada("examen", previaE);
-    i++;  
-  }
-  if(materia.condicionesPrevias){
-    res=res && conjuntoDePreviasAprobado(materia);
-  }
-  res=res && creditosPorAreaAprobados(materia);
+// function disponible(materiaId){
+//   let materia=materiasMap.get(materiaId);
+//   let res=true;
+//   let i=0;
+//   while(res==true && i<materia.previasCurso.length){
+//     let previaC=materia.previasCurso[i];
+//     res=res && esPreviaAprobada("curso", previaC);
+//     i++;
+//   }
+//   while(res==true && i<materia.previasExamen.length){
+//     let previaE=materia.previasExamen[i];
+//     res=res && esPreviaAprobada("examen", previaE);
+//     i++;  
+//   }
+//   if(materia.condicionesPrevias){
+//     res=res && conjuntoDePreviasAprobado(materia);
+//   }
+//   res=res && creditosPorAreaAprobados(materia);
 
-  return res;
-}
+//   return res;
+// }
 
 
-//O(n^2) se puede optimizar
-function actualizarDisponibles(){
-  materiasMap.forEach(mat=>{
-   if(disponible(mat.id)){
-    habilitar(mat.id,1);
-   }else{
-    habilitar(mat.id,0);
-   }
-  })
-}
+//O(n^2)
+// function actualizarDisponibles(){
+//   materiasMap.forEach(mat=>{
+//    if(disponible(mat.id)){
+//     habilitar(mat.id,1);
+//    }else{
+//     habilitar(mat.id,0);
+//    }
+//   })
+// }
 
 function alcanzaMinimo(sub){
   let subhtml=document.getElementById(sub+"grupo");
@@ -254,19 +269,21 @@ function sumaCreditosSimultaneo(){
   
 
 }
-function cambiarEstado(materiaId){
-  const buttonList=document.getElementsByClassName(materiaId);
-  for(const btn of buttonList){
-    if( ! btn.classList.contains("noDisponible")){     
-      let estActual=estados.find(m=>btn.classList.contains(m));
-      btn.classList.remove(estActual);
-      let estActualI=estados.indexOf(estActual);
-      btn.classList.add(estados[(estActualI+1) % estados.length ]);   
-    }
-  }
-  actualizarDisponibles();
-  sumaCreditosSimultaneo();
-}
+// function cambiarEstado(materiaId){
+//   const buttonList=document.getElementsByClassName(materiaId);
+//   for(const btn of buttonList){
+//     if( ! btn.classList.contains("noDisponible")){     
+//       let estActual=estados.find(m=>btn.classList.contains(m));
+//       btn.classList.remove(estActual);
+//       let estActualI=estados.indexOf(estActual);
+//       btn.classList.add(estados[(estActualI+1) % estados.length ]);   
+//     }
+//   }
+//   actualizarDisponibles();
+//   sumaCreditosSimultaneo();
+// }
+
+
 
 let creditosGlobal=0;
 let contenedorHtml = document.getElementById("matematicas");
@@ -311,5 +328,10 @@ contenedorHtml=document.getElementById("repetidasId");
 //   contenedor.innerHTML+="<div><p>" + materia + "</p></div>";
 // }
 
+
+
+actualizarDisponiblesInicial();
+
+previasInvertidas();
 
 actualizarDisponibles();
