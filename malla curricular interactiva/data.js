@@ -1,8 +1,9 @@
 const estados=["disponible" , "cursoAprobado", "examenAprobado"];
-const materiasMap= new Map();
+const materiasMap= new Map(); //a cada materia.id le asigna el objecto materia correspondiente
 const totalCreditosMap= new Map();
-const materiaHabilitaMap=new Map();
-const materiasAprobadasMap= new Map();// tiene la materia y si tiene curso o examen aprobado
+const materiaHabilitaMap=new Map(); // a cada materia.id le asigna un set con los id de las materias que habilita
+const contadorHabilitaMap=new Map(); //a cada contador de creditos se le asigna un set con las materias que habilita
+const materiasAprobadasMap= new Map();// tiene la materia.id y si tiene curso o examen aprobado
 
 //Las previas son para tomar el curso, no para tomar el examen.
 // Hay algunas materia que tienen la condicion no debe tener aprobadas:... estas condiciones no estan tenidas en cuenta
@@ -1292,7 +1293,7 @@ const pasantia=[
     previasExamen:[],
     previasCurso:[],
     creditosPorArea: new Map([["creditosCienciasDeLaIngenieria",20], 
-                            ["creditosIngenieriaAplicada",20], ["creditosCienciasBasicas",150]])
+        ["creditosIngenieriaAplicada",20], ["creditosCienciasBasicas",150]])
     },  
 ]
 const proyectoFinal=[

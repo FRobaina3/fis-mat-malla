@@ -6,27 +6,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- <div class="oculto dem-colores">
-        <p>Código de colores:</p>
-        <div class="ej-noDisponible"><p>Materia no habilitada</p></div>    
-        <div class="ej-disponible"> <p>Materia habilitada</p></div>    
-        <div class="ej-cursoAprobado"><p>Materia con Curso Aprobado</p></div>    
-        <div class="ej-examenAprobado"><p>Materia con Examen aprobado</p></div>   
-        <div class="ej-minimoAlcanzado"><p>Mínimo alcanzado</p></div> 
-    </div> -->
 
     <div class="contenedor-btn-aclaraciones">
         <button class="btn-aclaraciones" onclick="desplegarAclaraciones()">?</button>
     </div>
-    <!-- <div class="aclaraciones-overlay">
-        <div class="aclaraciones-conteiner">
-            Contenido acá
-        </div>
-    </div> -->
+
 
     <div class="oculto aclaraciones aclaraciones-overlay" id="aclaraciones">
         <div class="oculto aclaraciones aclaraciones-conteiner dem-colores" >
-            <p>Seleccione las materias en habilitadas para aprobarlas y exonerarlas. Se habilitaran nuevas 
+            <p>Seleccione las materias habilitadas para aprobarlas y exonerarlas. Se habilitarán nuevas 
                 materias a medida que consigas todas sus previas.
             </p>
             <p>Código de colores:</p>
@@ -58,89 +46,94 @@
         </div>
     </div>
 <div>
-    <p>Esta página es un aporte estudiantil no oficial. Sirve de guía pero NO es un mecanismo válido para hacer tu plan de carrera </p>
-    <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">
-        Crea tu perfil oficial usando el instructivo disponible en la página del EVA.
-    </a>
+    <p>⚠️⚠️ Esta página sirve de guía pero NO es un mecanismo válido para hacer tu plan de carrera ⚠️⚠️ </p>
+    <p>Crea tu perfil oficial usando el instructivo disponible en la 
+        <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">página del EVA</a>.
+    </p>
+    <a> Se pone en verde Ing. fis mat antes de que se complete los minimos</a>
+    <a>el pop se tiene que poder eliminar al tocar afuera</a>
+    <a>Que el navegador recuerde las materias que hiciste</a>
+    <a>intefas para borrar, agregar y actualizar materias</a>
+
 </div>
 <div id="creditosCienciasBasicasgrupo" class="grupo"> 
         <p>Ciencias Básicas</p>  
-        <p id="creditosCienciasBasicas" data-creditos="0" data-minCreditos="200">Créditos: </p><p>Mínimo 200 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+        <p id="creditosCienciasBasicas" data-creditos="0" data-minCreditos="200">Créditos: </p><p>Mínimo 200 </p>  
         <div id="creditosmatematicasgrupo" class="lista-materias"> 
             <p>Matemáticas</p>  
-            <p id="creditosmatematicas" data-creditos="0" data-minCreditos="75">Créditos:0 </p><p>Mínimo 75 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosmatematicas" data-creditos="0" data-minCreditos="75">Créditos:0 </p><p>Mínimo 75 </p>  
             <div id="matematicas"></div>
         </div>
         <div id="creditosfisicagrupo" class="lista-materias">
             <p>Física</p>  
-            <p id="creditosfisica" data-creditos="0" data-minCreditos="75">Créditos: 0 </p><p>Mínimo 75 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosfisica" data-creditos="0" data-minCreditos="75">Créditos: 0 </p><p>Mínimo 75 </p>  
             <div id="fisica"></div>
         </div>
         <div id="creditosquimicagrupo" class="lista-materias">
             <p>Química</p> 
-            <p id="creditosquimica" data-creditos="0"data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosquimica" data-creditos="0"data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p> 
             <div id="quimica"></div>
         </div>
         <div id="creditosbiologiagrupo"class="lista-materias">
             <p>Biología</p>  
-            <p id="creditosbiologia" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosbiologia" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  
             <div id="biologia"></div>
         </div>
     </div>
     <div id="creditosCienciasDeLaIngenieriagrupo" class="grupo"> 
         <p>Ciencias de la Ingeniería</p> 
-        <p id="creditosCienciasDeLaIngenieria" data-creditos="0" data-minCreditos="80">Créditos: 0 </p><p>Mínimo 80</p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+        <p id="creditosCienciasDeLaIngenieria" data-creditos="0" data-minCreditos="80">Créditos: 0 </p><p>Mínimo 80</p>  
         <div id="creditosComputacionCientificagrupo" class="lista-materias">
             <p>Computación Científica</p>  
-            <p id="creditosComputacionCientifica" data-creditos="0" data-minCreditos="50">Créditos: 0 </p><p>Mínimo 50 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosComputacionCientifica" data-creditos="0" data-minCreditos="50">Créditos: 0 </p><p>Mínimo 50 </p>  
             <div id="ComputacionCientifica"></div>
         </div>
         <div id="creditosModeladoFiscoMatematicogrupo" class="lista-materias">
             <p>Modelado Físico-Matemático</p>  
-            <p id="creditosModeladoFiscoMatematico" data-creditos="0" data-minCreditos="20">Créditos: 0 </p><p>Mínimo 20 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosModeladoFiscoMatematico" data-creditos="0" data-minCreditos="20">Créditos: 0 </p><p>Mínimo 20 </p> 
             <div id="ModeladoFiscoMatematico"></div>
         </div>
     </div>
     <div id="creditosContenidosComplementariosgrupo" class="grupo"> 
         <p>Contenidos Complementarios</p>
-        <p id="creditosContenidosComplementarios" data-creditos="0" data-minCreditos="12">Créditos: 0 </p><p>Mínimo 12</p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+        <p id="creditosContenidosComplementarios" data-creditos="0" data-minCreditos="12">Créditos: 0 </p><p>Mínimo 12</p>  
         <div id="creditosActividadesComplementariasgrupo" class="lista-materias">
             <p>Actividades Complementarias</p>
-            <p id="creditosActividadesComplementarias" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosActividadesComplementarias" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p> 
             <div id="ActividadesComplementarias"></div>
         </div>
         <div id="creditosIngenieriaYSociedadgrupo" class="lista-materias">
-            <p>Ingeniería y Sociedad</p>  <!-- Cambiado: "Ingenieria" a "Ingeniería" -->
-            <p id="creditosIngenieriaYSociedad" data-creditos="0" data-minCreditos="12">Créditos: 0 </p><p>Mínimo 12 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p>Ingeniería y Sociedad</p> 
+            <p id="creditosIngenieriaYSociedad" data-creditos="0" data-minCreditos="12">Créditos: 0 </p><p>Mínimo 12 </p>  
             <div id="IngenieriaYSociedad"></div>
         </div>
     </div>
     <div id="creditosIngenieriaAplicadagrupo" class="grupo"> 
-        <p>Ingeniería Aplicada</p>  <!-- Cambiado: "Ingenieria" a "Ingeniería" -->
-        <p id="creditosIngenieriaAplicada" data-creditos="0" data-minCreditos="120">Créditos: 0 </p><p>Mínimo 120</p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+        <p>Ingeniería Aplicada</p>  
+        <p id="creditosIngenieriaAplicada" data-creditos="0" data-minCreditos="120">Créditos: 0 </p><p>Mínimo 120</p> 
         <div id="creditosAreaDeFormacionTecnologicagrupo" class="lista-materias">
-            <p>Área de Formación Tecnológica</p>  <!-- Cambiados: "Area" a "Área", "Formacion" a "Formación" -->
-            <p id="creditosAreaDeFormacionTecnologica" data-creditos="0" data-minCreditos="60">Créditos: 0 </p><p>Mínimo 60 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p>Área de Formación Tecnológica</p>  
+            <p id="creditosAreaDeFormacionTecnologica" data-creditos="0" data-minCreditos="60">Créditos: 0 </p><p>Mínimo 60 </p>  
             <div id="AreaDeFormacionTecnologica"></div>
         </div>
         <div id="creditosTalleresgrupo" class="lista-materias">
             <p>Talleres</p>
-            <p id="creditosTalleres" data-creditos="0" data-minCreditos="10">Créditos: 0 </p><p>Mínimo 10 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosTalleres" data-creditos="0" data-minCreditos="10">Créditos: 0 </p><p>Mínimo 10 </p>  
             <div id="Talleres"></div>
         </div>
         <div id="creditosPasantiagrupo" class="lista-materias">
-            <p>Pasantías</p>  <!-- Cambiado: "Pasantias" a "Pasantías" -->
-            <p id="creditosPasantia" data-creditos="0" data-minCreditos="8">Créditos: 0 </p><p>Mínimo 8 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p>Pasantías</p>  
+            <p id="creditosPasantia" data-creditos="0" data-minCreditos="8">Créditos: 0 </p><p>Mínimo 8 </p>  
             <div id="Pasantia"></div>
         </div>
         <div id="creditosProyectoFinalgrupo" class="lista-materias">
             <p>Proyecto Final</p>
-            <p id="creditosProyectoFinal" data-creditos="0" data-minCreditos="35">Créditos: 0 </p><p>Mínimo 35 </p>  <!-- Cambiados: "Creditos" a "Créditos", "Minimo" a "Mínimo" -->
+            <p id="creditosProyectoFinal" data-creditos="0" data-minCreditos="35">Créditos: 0 </p><p>Mínimo 35 </p>  
             <div id="ProyectoFinal"></div>
         </div>
     </div>
     <div class="bottom">
-        <p class="bottom-firma">Felipe Robaina Passeggi 2026</p>  <!-- Cambiado: "2025" a "2026" (consistencia con aclaraciones) -->
+        <p class="bottom-firma">Felipe Robaina Passeggi 2026</p> 
         <p class="bottom-contacto">Contacto: felirobaina3@gmail.com</p>
     </div>
     

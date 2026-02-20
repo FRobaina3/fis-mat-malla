@@ -135,140 +135,141 @@ function desplegarAclaraciones(){
 //   })
 // }
 
-function alcanzaMinimo(sub){
-  let subhtml=document.getElementById(sub+"grupo");
-  let creditosSubgrupoHtml=document.getElementById(sub)
-  let minimo=creditosSubgrupoHtml.dataset.mincreditos;
-  let creditosActual=Number(creditosSubgrupoHtml.dataset.creditos)
-  if(creditosActual>=minimo){
-    if(subhtml && subhtml.classList.contains("lista-materias")){
-      subhtml.classList.remove("lista-materias");
-      subhtml.classList.add("lista-materias-aprobadas")   
-    }
-  }else{
-    if(subhtml && subhtml.classList.contains("lista-materias-aprobadas")){
-      subhtml.classList.add("lista-materias");
-      subhtml.classList.remove("lista-materias-aprobadas")
-    }
-  }
-}
+// function alcanzaMinimo(sub){
+//   let subhtml=document.getElementById(sub+"grupo");
+//   let creditosSubgrupoHtml=document.getElementById(sub)
+//   let minimo=creditosSubgrupoHtml.dataset.mincreditos;
+//   let creditosActual=Number(creditosSubgrupoHtml.dataset.creditos)
+//   if(creditosActual>=minimo){
+//     if(subhtml && subhtml.classList.contains("lista-materias")){
+//       subhtml.classList.remove("lista-materias");
+//       subhtml.classList.add("lista-materias-aprobadas")   
+//     }
+//   }else{
+//     if(subhtml && subhtml.classList.contains("lista-materias-aprobadas")){
+//       subhtml.classList.add("lista-materias");
+//       subhtml.classList.remove("lista-materias-aprobadas")
+//     }
+//   }
+// }
 
-function minimosAlcazadosSub(){
-  setSub.forEach(sub=>{
-  let subhtml=document.getElementById(sub+"grupo");
-  let creditosSubgrupoHtml=document.getElementById(sub)
-  let minimo=creditosSubgrupoHtml.dataset.mincreditos;
-  let creditosActual=Number(creditosSubgrupoHtml.dataset.creditos)
-  if(creditosActual>=minimo){
-    if(subhtml && subhtml.classList.contains("lista-materias")){
-      subhtml.classList.remove("lista-materias");
-      subhtml.classList.add("lista-materias-aprobadas")   
-    }
-  }else{
-    if(subhtml && subhtml.classList.contains("lista-materias-aprobadas")){
-      subhtml.classList.add("lista-materias");
-      subhtml.classList.remove("lista-materias-aprobadas")
-    }
-  }
-  })
-  minimosAlcanzadosGrupo();
-  minimoAlcanzadoGlobal();
-}
+// function minimosAlcazadosSub(){
+//   setSub.forEach(sub=>{
+//   let subhtml=document.getElementById(sub+"grupo");
+//   let creditosSubgrupoHtml=document.getElementById(sub)
+//   let minimo=creditosSubgrupoHtml.dataset.mincreditos;
+//   let creditosActual=Number(creditosSubgrupoHtml.dataset.creditos)
+//   if(creditosActual>=minimo){
+//     if(subhtml && subhtml.classList.contains("lista-materias")){
+//       subhtml.classList.remove("lista-materias");
+//       subhtml.classList.add("lista-materias-aprobadas")   
+//     }
+//   }else{
+//     if(subhtml && subhtml.classList.contains("lista-materias-aprobadas")){
+//       subhtml.classList.add("lista-materias");
+//       subhtml.classList.remove("lista-materias-aprobadas")
+//     }
+//   }
+//   })
+//   minimosAlcanzadosGrupo();
+//   minimoAlcanzadoGlobal();
+// }
 
-function minimosAlcanzadosGrupo(){
-  setGrupos.forEach(grp=>{
-    let grupohtml=document.getElementById(grp+"grupo");
-    let creditosgrphtml=document.getElementById(grp);
-    // console.log(grupohtml);
-    // console.log(creditosgrphtml);
-    let minimo=Number(creditosgrphtml.dataset.mincreditos);
-    let creditosActual= Number(creditosgrphtml.dataset.creditos);
+// function minimosAlcanzadosGrupo(){
+//   setGrupos.forEach(grp=>{
+//     let grupohtml=document.getElementById(grp+"grupo");
+//     let creditosgrphtml=document.getElementById(grp);
+//     // console.log(grupohtml);
+//     // console.log(creditosgrphtml);
+//     let minimo=Number(creditosgrphtml.dataset.mincreditos);
+//     let creditosActual= Number(creditosgrphtml.dataset.creditos);
 
-    if(creditosActual>=minimo && grupohtml.classList.contains("grupo")){
-      grupohtml.classList.add("grupo-aprobado");
-      grupohtml.classList.remove("grupo");     
-    }else if(creditosActual<=minimo && grupohtml.classList.contains("grupo-aprobado")){
-      grupohtml.classList.remove("grupo-aprobado");
-      grupohtml.classList.add("grupo");     
-    }
-  })
-}
-function minimoAlcanzadoGlobal(){
-  let globalHtml=document.getElementById("creditosGlobalgrupo");
-  let creditosGlobalHtml=document.getElementById("creditosGlobal");
-  let creditosActual=Number(creditosGlobalHtml.dataset.creditos);
-  if(creditosActual>=450 && globalHtml.classList.contains("marco-superior")){
-    globalHtml.classList.remove("marco-superior");
-    globalHtml.classList.add("marco-superior-aprobado");
-  }else if(creditosActual<=450 && globalHtml.classList.contains("marco-superior-aprobado")){
-    globalHtml.classList.add("marco-superior");
-    globalHtml.classList.remove("marco-superior-aprobado");
-  }       
-}
+//     if(creditosActual>=minimo && grupohtml.classList.contains("grupo")){
+//       grupohtml.classList.add("grupo-aprobado");
+//       grupohtml.classList.remove("grupo");     
+//     }else if(creditosActual<=minimo && grupohtml.classList.contains("grupo-aprobado")){
+//       grupohtml.classList.remove("grupo-aprobado");
+//       grupohtml.classList.add("grupo");     
+//     }
+//   })
+// }
+// function minimoAlcanzadoGlobal(){
+//   let globalHtml=document.getElementById("creditosGlobalgrupo");
+//   let creditosGlobalHtml=document.getElementById("creditosGlobal");
+//   let creditosActual=Number(creditosGlobalHtml.dataset.creditos);
+//   if(creditosActual>=450 && globalHtml.classList.contains("marco-superior")){
+//     globalHtml.classList.remove("marco-superior");
+//     globalHtml.classList.add("marco-superior-aprobado");
+//   }else if(creditosActual<=450 && globalHtml.classList.contains("marco-superior-aprobado")){
+//     globalHtml.classList.add("marco-superior");
+//     globalHtml.classList.remove("marco-superior-aprobado");
+//   }       
+// }
 
 //NO PUEDO SUMAR UNA VEZ POR MATERIA. HAY ALGUNAS QUE SUMAN REPARTEN SU CANTIDAD TOTAL DE CREDITOS ENTRE LOS GRUPOS COMO SeyS
 //Creo que tengo que sumar cada apariccion de materia aunque este repetido
-function sumaCreditosSimultaneo(){ 
-  //Se supone que una materia suma a todos los grupos a los que pertenece, pero como suma a lo global?
+// function sumaCreditosSimultaneo(){ 
+//   //Se supone que una materia suma a todos los grupos a los que pertenece, pero como suma a lo global?
 
-  //este metodo suma una sola vez al global
-  // let aprobadas=document.getElementsByClassName("examenAprobado");
-  // let setAprobadas=new Set();
-  // for(const apr of aprobadas){
-  //   setAprobadas.add(apr.classList[0]);
-  // }
-  // let sum=0
-  // for(const aprId of setAprobadas){
-  //   let materia=materiasMap.get(aprId);
-  //   sum=sum+materia.creditos;
-  // }
-  // document.getElementById("creditosGlobal").innerText = "Creditos:" + sum;
+//   //este metodo suma una sola vez al global
+//   // let aprobadas=document.getElementsByClassName("examenAprobado");
+//   // let setAprobadas=new Set();
+//   // for(const apr of aprobadas){
+//   //   setAprobadas.add(apr.classList[0]);
+//   // }
+//   // let sum=0
+//   // for(const aprId of setAprobadas){
+//   //   let materia=materiasMap.get(aprId);
+//   //   sum=sum+materia.creditos;
+//   // }
+//   // document.getElementById("creditosGlobal").innerText = "Creditos:" + sum;
 
-  //este metodo suma los creditos q le aparecen a la derecha cuando esta impreso
-  let aprobadas=document.getElementsByClassName("examenAprobado");
-  let sum=0;
-  //resetea contador de creditos visible
-  for(const grp of setTodosGruposYSub){
-    document.getElementById(grp).dataset.creditos="0";
-  }
-  //suma en el contador de creditos invisible (data-creditos), de los subgrupos y del total global
-  for(const apr of aprobadas){
-    let creditos=Number(apr.dataset.creditos);
-    sum=sum+creditos;
-    let subgrupo=apr.classList[1];
-    let creditosSubgrupoHtml=document.getElementById("creditos"+subgrupo);
-    let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
-    let sumSub=credActualSub+creditos;
-    creditosSubgrupoHtml.dataset.creditos=sumSub;
-    //creditosSubgrupoHtml.innerText="Creditos: " + sumSub ;
-  }
-  //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
-  for(const grp of setTodosGruposYSub){
-    let aux=document.getElementById(grp);
-    aux.innerText="Creditos: " +aux.dataset.creditos;
-  }
-  for(const subgrp of setSub){
-    let subHtml=document.getElementById(subgrp);
-    let creditosSub=Number(subHtml.dataset.creditos);
-    let groupHtml=document.getElementById(mapSubAGrupo.get(subgrp));
-    let creditosGroup=Number(groupHtml.dataset.creditos);
-    groupHtml.dataset.creditos=creditosGroup+creditosSub;
-  }
-  let creditosGlobalHtml=document.getElementById("creditosGlobal");
-  // creditosGlobalHtml.innerText = "Creditos:" + sum;
-  creditosGlobalHtml.dataset.creditos = sum;
+//   //este metodo suma los creditos q le aparecen a la derecha cuando esta impreso
+//   let aprobadas=document.getElementsByClassName("examenAprobado");
+//   let sum=0;
+//   //resetea contador de creditos visible
+//   for(const grp of setTodosGruposYSub){
+//     document.getElementById(grp).dataset.creditos="0";
+//   }
+//   //suma en el contador de creditos invisible (data-creditos), de los subgrupos y del total global
+//   for(const apr of aprobadas){
+//     let creditos=Number(apr.dataset.creditos);
+//     sum=sum+creditos;
+//     let subgrupo=apr.classList[1];
+//     let creditosSubgrupoHtml=document.getElementById("creditos"+subgrupo);
+//     let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
+//     let sumSub=credActualSub+creditos;
+//     creditosSubgrupoHtml.dataset.creditos=sumSub;
+//     //creditosSubgrupoHtml.innerText="Creditos: " + sumSub ;
+//   }
+//   //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
+//   for(const grp of setTodosGruposYSub){
+//     let aux=document.getElementById(grp);
+//     aux.innerText="Creditos: " +aux.dataset.creditos;
+//   }
+//   for(const subgrp of setSub){
+//     let subHtml=document.getElementById(subgrp);
+//     let creditosSub=Number(subHtml.dataset.creditos);
+//     let groupHtml=document.getElementById(mapSubAGrupo.get(subgrp));
+//     let creditosGroup=Number(groupHtml.dataset.creditos);
+//     groupHtml.dataset.creditos=creditosGroup+creditosSub;
+//   }
+//   let creditosGlobalHtml=document.getElementById("creditosGlobal");
+//   // creditosGlobalHtml.innerText = "Creditos:" + sum;
+//   creditosGlobalHtml.dataset.creditos = sum;
   
-  //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
-  for(const grp of setTodosGruposYSub){
-    let aux=document.getElementById(grp);
-    aux.innerText="Creditos: " +aux.dataset.creditos;
-  }
+//   //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
+//   for(const grp of setTodosGruposYSub){
+//     let aux=document.getElementById(grp);
+//     aux.innerText="Creditos: " +aux.dataset.creditos;
+//   }
 
-  //Reviso si se alcanzan los minimos
-  minimosAlcazadosSub();
+//   //Reviso si se alcanzan los minimos
+//   minimosAlcazadosSub();
   
 
-}
+// }
+
 // function cambiarEstado(materiaId){
 //   const buttonList=document.getElementsByClassName(materiaId);
 //   for(const btn of buttonList){
