@@ -1,18 +1,24 @@
+// // Función para alternar el estado de los toggle buttons
+// function toggleButton(btn) {
+//   btn.classList.toggle('active');
+//   // Aquí puedes llamar a cualquier función adicional
+//   // Ejemplo: console.log(btn.id + ' toggled:', btn.classList.contains('active'));
+// }
 
-//
-function imprimir(materia,contenedor){
-  contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
-  onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
-}
+// //
+// function imprimir(materia,contenedor){
+//   contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
+//   onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
+// }
 
-function ocultarMostrarClass(clase){
-  lista=getElementsByClassName(clase);
-  lista.forEach(elem=>{elem.classList.toggle("oculto")});
-}
-function ocultarMostrarIdElemento(idElem){
-  lista=getElementsById(idElem);
-  lista.forEach(elem=>{elem.classList.toggle("oculto")});
-}
+// function ocultarMostrarClass(clase){
+//   lista=getElementsByClassName(clase);
+//   lista.forEach(elem=>{elem.classList.toggle("oculto")});
+// }
+// function ocultarMostrarIdElemento(idElem){
+//   lista=getElementsById(idElem);
+//   lista.forEach(elem=>{elem.classList.toggle("oculto")});
+// }
 
 
 
@@ -20,10 +26,10 @@ function ocultarMostrarIdElemento(idElem){
 ///============  De aca para abajo funciones viejas  ==================
 
 
-function desplegarAclaraciones(){
-  let textList=document.getElementsByClassName("aclaraciones");
-  Array.from(textList).forEach(t=>{t.classList.toggle("oculto")})
-}
+// function desplegarAclaraciones(){
+//   let textList=document.getElementsByClassName("aclaraciones");
+//   Array.from(textList).forEach(t=>{t.classList.toggle("oculto")})
+// }
 
 //Cambia la materia de disponible a no disponible si siono=1, si es =0 la deshabilita. No controla si es valido
 // function habilitar(materiaId,siono){
@@ -328,6 +334,7 @@ contenedorHtml=document.getElementById("repetidasId");
 // function imprimirRepetidas(materia,contenedor){
 //   contenedor.innerHTML+="<div><p>" + materia + "</p></div>";
 // }
+
 
 
 

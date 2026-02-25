@@ -1,3 +1,66 @@
+/* Make radio button appear to the right of the label text */
+label[style*="margin-left"] {
+    display: flex;
+    color: #fff;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 0.5em;
+}
+/* Make radio button symbol larger */
+label[style*="margin-left"] input[type="radio"] {
+    width: 1.3em;
+    height: 1.3em;
+    accent-color: #148600;
+    vertical-align: middle;
+}
+
+/* Toggle button estilo */
+.toggle-button {
+    background: #222;
+    color: #fff;
+    border: 2px solid #aaa;
+    border-radius: 8px;
+    font-size: medium;
+    font-weight: 500;
+    margin: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.toggle-button.active {
+    background: #0264db;
+    color: #fff;
+    border-color: #0057b3;
+}
+.toggle-button:hover {
+    background: #444;
+    color: #fff;
+    border-color: #222;
+}
+/* Botón cerrar aclaraciones */
+.btn-cerrar-aclaraciones {
+    background: #222;
+    color: #fff;
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-cerrar-aclaraciones:hover {
+    background: #e90000;
+    color: #ffffff;
+    border: 2px solid #222;
+}
 body {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background-color: rgb(10, 10, 30); /* Azul oscuro para fondo principal */
@@ -36,16 +99,29 @@ a{
 
 
 .marco-superior{
-    position: fixed;
-    width:100%;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    background-color: rgb(0, 50, 100); /* Azul más intenso */
-    border: 3px solid rgb(0, 150, 200); /* Azul claro */
-    padding: 5px;
-    z-index:999;
+        position: fixed;
+        width:100%;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        background-color: rgb(0, 50, 100); /* Azul más intenso */
+        border: 3px solid rgb(0, 150, 200); /* Azul claro */
+        padding: 5px;
+        z-index:999;
+        min-height: 70px;
 }
+
+/* Centrar el h1 en el centro de la página dentro de marco-superior */
+.marco-superior h1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    white-space: nowrap;
+    z-index: 1001;
+}
+
 .marco-superior-aprobado{
     position: fixed;
     width:100%;
@@ -57,6 +133,20 @@ a{
     border-radius: 10px;
     padding: 5px;
     z-index:999;
+}
+.marco-superior-aprobado h1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    white-space: nowrap;
+    z-index: 1001;
+}
+.marco-superior-flex {
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .opciones-conteiner{   

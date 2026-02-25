@@ -14,6 +14,7 @@
 
     <div class="oculto aclaraciones aclaraciones-overlay" id="aclaraciones">
         <div class="oculto aclaraciones aclaraciones-conteiner dem-colores" >
+            <button class="btn-cerrar-aclaraciones" onclick="desplegarAclaraciones()" title="Cerrar">X</button>
             <p>Seleccione las materias habilitadas para aprobarlas y exonerarlas. Se habilitarán nuevas 
                 materias a medida que consigas todas sus previas.
             </p>
@@ -38,99 +39,152 @@
         </div>
     </div>
     <div id="creditosGlobalgrupo" class="marco-superior">
-        <h1>Ing. Físico-Matemático</h1>
-        <h3 id="creditosGlobal" data-creditos="0" data-minCreditos="450">Creditos:</h3>
-        <p> Mínimo 450</p>
+        <div class="marco-superior-flex">
+            <div><h3 id="creditosGlobal" data-creditos="0" data-minCreditos="450">Creditos: 0</h3>
+                <p> Mínimo 450</p>
+            </div>
+            <div><h1>Ing. Físico-Matemático</h1></div>
+        </div>
         <div class="opciones-conteiner">
-            <!-- <button class="opciones"> Todas las materias</button> -->
+
+            <label style="margin-left: 10px;">
+                <input type="radio" name="opcion-materias" value="opcion1" onchange=""> Todas las materias
+            </label>
+            <label style="margin-left: 10px;">
+                <input type="radio" name="opcion-materias" value="opcion3" onchange=""> Materias aprobadas y disponibles
+            </label>
+            <label style="margin-left: 10px;">
+                <input type="radio" name="opcion-materias" value="opcion2" onchange=""> Materias disponibles
+            </label>
+ 
         </div>
     </div>
-<div>
-    <p>⚠️⚠️ Esta página sirve de guía pero NO es un mecanismo válido para hacer tu plan de carrera ⚠️⚠️ </p>
-    <p>Crea tu perfil oficial usando el instructivo disponible en la 
-        <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">página del EVA</a>.
-    </p>
-    <a> Se pone en verde Ing. fis mat antes de que se complete los minimos</a>
-    <a>el pop se tiene que poder eliminar al tocar afuera</a>
-    <a>Que el navegador recuerde las materias que hiciste</a>
-    <a>intefas para borrar, agregar y actualizar materias</a>
+    <div>
+        <p>⚠️⚠️ Esta página sirve de guía pero NO es un mecanismo válido para hacer tu plan de carrera ⚠️⚠️ </p>
+        <p>Crea tu perfil oficial usando el instructivo disponible en la 
+            <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">página del EVA</a>.
+        </p>
+        <a> Se pone en verde Ing. fis mat antes de que se complete los minimos</a>
+        <a>el pop se tiene que poder eliminar al tocar afuera</a>
+        <a>Que el navegador recuerde las materias que hiciste</a>
+        <a>intefas para borrar, agregar y actualizar materias</a>
 
-</div>
-<div id="creditosCienciasBasicasgrupo" class="grupo"> 
-        <p>Ciencias Básicas</p>  
-        <p id="creditosCienciasBasicas" data-creditos="0" data-minCreditos="200">Créditos: </p><p>Mínimo 200 </p>  
-        <div id="creditosmatematicasgrupo" class="lista-materias"> 
-            <p>Matemáticas</p>  
-            <p id="creditosmatematicas" data-creditos="0" data-minCreditos="75">Créditos:0 </p><p>Mínimo 75 </p>  
-            <div id="matematicas"></div>
-        </div>
-        <div id="creditosfisicagrupo" class="lista-materias">
-            <p>Física</p>  
-            <p id="creditosfisica" data-creditos="0" data-minCreditos="75">Créditos: 0 </p><p>Mínimo 75 </p>  
-            <div id="fisica"></div>
-        </div>
-        <div id="creditosquimicagrupo" class="lista-materias">
-            <p>Química</p> 
-            <p id="creditosquimica" data-creditos="0"data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p> 
-            <div id="quimica"></div>
-        </div>
-        <div id="creditosbiologiagrupo"class="lista-materias">
-            <p>Biología</p>  
-            <p id="creditosbiologia" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  
-            <div id="biologia"></div>
+    </div>
+    <div id="creditosCienciasBasicasgrupo" class="grupo"> 
+            <p>Ciencias Básicas 
+                    <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('CienciasBasicas')">▼</button>
+            </p>  
+        <div id="CienciasBasicas">
+            <p id="creditosCienciasBasicas" data-creditos="0" data-minCreditos="200">Créditos: 0</p><p>Mínimo 200 </p>  
+            <div id="creditosmatematicasgrupo" class="lista-materias"> 
+                <p>Matematicas
+                    <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('matematicas')">▼</button>
+                </p>  
+                <p id="creditosmatematicas" data-creditos="0" data-minCreditos="75">Créditos:0 </p><p>Mínimo 75 </p>  
+                <div id="matematicas"></div>
+            </div>
+            <div id="creditosfisicagrupo" class="lista-materias">
+                <p>Física
+                    <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('fisica')">▼</button>
+                </p>  
+                <p id="creditosfisica" data-creditos="0" data-minCreditos="75">Créditos: 0 </p><p>Mínimo 75 </p>  
+                <div id="fisica"></div>
+            </div>
+            <div id="creditosquimicagrupo" class="lista-materias">
+                <p>Química
+                    <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('quimica')">▼</button>
+                </p> 
+                <p id="creditosquimica" data-creditos="0"data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p> 
+                <div id="quimica"></div>
+            </div>
+            <div id="creditosbiologiagrupo"class="lista-materias">
+                <p>Biología
+                    <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('biologia')">▼</button>
+                </p>  
+                <p id="creditosbiologia" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p>  
+                <div id="biologia"></div>
+            </div>
         </div>
     </div>
     <div id="creditosCienciasDeLaIngenieriagrupo" class="grupo"> 
-        <p>Ciencias de la Ingeniería</p> 
+        <p>Ciencias de la Ingeniería
+            <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('CienciasDeLaIngenieria')">▼</button>
+        </p> 
+        <div id="CienciasDeLaIngenieria">
         <p id="creditosCienciasDeLaIngenieria" data-creditos="0" data-minCreditos="80">Créditos: 0 </p><p>Mínimo 80</p>  
         <div id="creditosComputacionCientificagrupo" class="lista-materias">
-            <p>Computación Científica</p>  
+            <p>Computación Científica
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('ComputacionCientifica')">▼</button>
+            </p>  
             <p id="creditosComputacionCientifica" data-creditos="0" data-minCreditos="50">Créditos: 0 </p><p>Mínimo 50 </p>  
             <div id="ComputacionCientifica"></div>
         </div>
         <div id="creditosModeladoFiscoMatematicogrupo" class="lista-materias">
-            <p>Modelado Físico-Matemático</p>  
+            <p>Modelado Físico-Matemático
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('ModeladoFiscoMatematico')">▼</button>
+            </p>  
             <p id="creditosModeladoFiscoMatematico" data-creditos="0" data-minCreditos="20">Créditos: 0 </p><p>Mínimo 20 </p> 
             <div id="ModeladoFiscoMatematico"></div>
         </div>
     </div>
+    </div>
     <div id="creditosContenidosComplementariosgrupo" class="grupo"> 
-        <p>Contenidos Complementarios</p>
+        <p>Contenidos Complementarios
+            <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('ContenidosComplementarios')">▼</button>
+        </p>
+        <div id="ContenidosComplementarios">
         <p id="creditosContenidosComplementarios" data-creditos="0" data-minCreditos="12">Créditos: 0 </p><p>Mínimo 12</p>  
         <div id="creditosActividadesComplementariasgrupo" class="lista-materias">
-            <p>Actividades Complementarias</p>
+            <p>Actividades Complementarias
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('ActividadesComplementarias')">▼</button>
+            </p>
             <p id="creditosActividadesComplementarias" data-creditos="0" data-minCreditos="0">Créditos: 0 </p><p>Mínimo 0 </p> 
             <div id="ActividadesComplementarias"></div>
         </div>
         <div id="creditosIngenieriaYSociedadgrupo" class="lista-materias">
-            <p>Ingeniería y Sociedad</p> 
+            <p>Ingeniería y Sociedad
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('IngenieriaYSociedad')">▼</button>
+            </p> 
             <p id="creditosIngenieriaYSociedad" data-creditos="0" data-minCreditos="12">Créditos: 0 </p><p>Mínimo 12 </p>  
             <div id="IngenieriaYSociedad"></div>
         </div>
     </div>
+    </div>
     <div id="creditosIngenieriaAplicadagrupo" class="grupo"> 
-        <p>Ingeniería Aplicada</p>  
+        <p>Ingeniería Aplicada
+            <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('IngenieriaAplicada')">▼</button>
+        </p>  
+        <div id="IngenieriaAplicada">
         <p id="creditosIngenieriaAplicada" data-creditos="0" data-minCreditos="120">Créditos: 0 </p><p>Mínimo 120</p> 
         <div id="creditosAreaDeFormacionTecnologicagrupo" class="lista-materias">
-            <p>Área de Formación Tecnológica</p>  
+            <p>Área de Formación Tecnológica
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('AreaDeFormacionTecnologica')">▼</button>
+            </p>  
             <p id="creditosAreaDeFormacionTecnologica" data-creditos="0" data-minCreditos="60">Créditos: 0 </p><p>Mínimo 60 </p>  
             <div id="AreaDeFormacionTecnologica"></div>
         </div>
         <div id="creditosTalleresgrupo" class="lista-materias">
-            <p>Talleres</p>
+            <p>Talleres
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('Talleres')">▼</button>
+            </p>
             <p id="creditosTalleres" data-creditos="0" data-minCreditos="10">Créditos: 0 </p><p>Mínimo 10 </p>  
             <div id="Talleres"></div>
         </div>
         <div id="creditosPasantiagrupo" class="lista-materias">
-            <p>Pasantías</p>  
+            <p>Pasantías
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('Pasantia')">▼</button>
+            </p>  
             <p id="creditosPasantia" data-creditos="0" data-minCreditos="8">Créditos: 0 </p><p>Mínimo 8 </p>  
             <div id="Pasantia"></div>
         </div>
         <div id="creditosProyectoFinalgrupo" class="lista-materias">
-            <p>Proyecto Final</p>
+            <p>Proyecto Final
+                <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('ProyectoFinal')">▼</button>
+            </p>
             <p id="creditosProyectoFinal" data-creditos="0" data-minCreditos="35">Créditos: 0 </p><p>Mínimo 35 </p>  
             <div id="ProyectoFinal"></div>
         </div>
+    </div>
     </div>
     <div class="bottom">
         <p class="bottom-firma">Felipe Robaina Passeggi 2026</p> 

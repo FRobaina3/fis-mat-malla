@@ -1,4 +1,3 @@
-
 //Imprime una materia
 function imprimir(materia,contenedor){
   contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
@@ -6,12 +5,13 @@ function imprimir(materia,contenedor){
 }
 
 function ocultarMostrarClass(clase){
-  lista=getElementsByClassName(clase);
+  lista=document.getElementsByClassName(clase);
+  
   lista.forEach(elem=>{elem.classList.toggle("oculto")});
 }
 function ocultarMostrarIdElemento(idElem){
-  lista=getElementsById(idElem);
-  lista.forEach(elem=>{elem.classList.toggle("oculto")});
+  elem=document.getElementById(idElem);
+  elem.classList.toggle("oculto");
 }
 
 //guarda en materiaHabilitaMap que previa habilita materia
@@ -278,7 +278,7 @@ function cambiarEstado(materiaId){
         materiasAprobadasMap.set(materiaId,"examenAprobado");
     }
   }
-   window.requestAnimationFrame(() => {
+  window.requestAnimationFrame(() => {
     actualizarDisponibles();
     sumaCreditosSimultaneo();
   });
@@ -288,7 +288,6 @@ function cambiarEstado(materiaId){
 
 //Suma los creditos de las materias exoneradas, tiene en cuenta que suman en diferentes lugares
 function sumaCreditosSimultaneo(){ 
-
   //este metodo suma los creditos q le aparecen a la derecha cuando esta impreso
   let aprobadas=document.getElementsByClassName("examenAprobado");
   let sum=0;
@@ -376,16 +375,14 @@ function minimosAlcazadosSub(){
 }
 
 function todosLosElementosLlegaronAlMinimo(setElementos){
+  let resultado=true;
   setElementos.forEach(Elem=>{
     let creditosElemhtml=document.getElementById(Elem);
     let minimo=Number(creditosElemhtml.dataset.mincreditos);
     let creditosActual= Number(creditosElemhtml.dataset.creditos);
-    if(creditosActual>=minimo){
-      return true;
-    }else{
-      return false;
-    }
+    resultado=resultado && (creditosActual>=minimo)
   })
+  return resultado;
 }
 
 function minimosAlcanzadosGrupo(){
@@ -418,3 +415,97 @@ function minimoAlcanzadoGlobal(){
     globalHtml.classList.remove("marco-superior-aprobado");
   }       
 }
+
+function desplegarAclaraciones(){
+  let textList=document.getElementsByClassName("aclaraciones");
+  Array.from(textList).forEach(t=>{t.classList.toggle("oculto")})
+}
+
+// Función para alternar el estado de los toggle buttons y el símbolo
+function toggleButtonMinimizar(btn) {
+  btn.classList.toggle('active');
+  // Cambia el texto entre ▼ y ▲
+  if (btn.classList.contains('active')) {
+    btn.innerText = '▼';
+  } else {
+    btn.innerText = '▲';
+  }
+}
+
+// Alterna visibilidad de todos los elementos de la clase dada
+function ocultarMostrarClass(clase) {
+  const elems = document.getElementsByClassName(clase);
+  for (let elem of elems) {
+    elem.classList.toggle('oculto');
+  }
+}
+
+function ocultarMostrarIdElemento(idElem){
+  elem=document.getElementById(idElem);
+  elem.classList.toggle("oculto");
+}
+
+//
+function imprimir(materia,contenedor){
+  contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
+  onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
+}
+
+
+/**
+ * Determina si un botón debe mostrarse u ocultarse según el filtro
+ */
+function actualizarVisibilidad(btn) {
+    // 1. Buscamos qué filtro está marcado en este preciso momento
+    const filtroActivo = document.querySelector('input[name="opcion-materias"]:checked')?.value || 'opcion1';
+    
+    let visible = false;
+
+    if (filtroActivo === 'opcion1') {
+        visible = true; // Mostrar todas
+    } else if (filtroActivo === 'opcion2') {
+        visible = btn.classList.contains('disponible');
+    } else if (filtroActivo === 'opcion3') {
+        visible = btn.classList.contains('disponible') || 
+                  btn.classList.contains('cursoAprobado') || 
+                  btn.classList.contains('examenAprobado');
+    }
+
+    // 2. Aplicamos el cambio visual
+    btn.style.display = visible ? '' : 'none';
+}
+
+function iniciarSistemaMaterias() {
+    const botones = document.querySelectorAll('button.disponible, button.noDisponible, button.cursoAprobado, button.examenAprobado');
+    const radios = document.querySelectorAll('input[name="opcion-materias"]');
+
+    // --- CONFIGURACIÓN DEL OBSERVER ---
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+            // Si cambia la clase, re-evaluamos la visibilidad de ese botón
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                actualizarVisibilidad(mutation.target);
+            }
+        });
+    });
+
+    // --- ACTIVACIÓN ---
+    
+    // A. Observar cambios de clase en cada botón
+    botones.forEach(btn => {
+        observer.observe(btn, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // B. Escuchar cuando el usuario cambia el radio button (filtro)
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            botones.forEach(btn => actualizarVisibilidad(btn));
+        });
+    });
+
+    // C. Ejecución inicial (para que empiece filtrado al cargar la página)
+    botones.forEach(btn => actualizarVisibilidad(btn));
+}
+
+// Arrancamos cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', iniciarSistemaMaterias);
