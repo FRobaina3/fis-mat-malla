@@ -11,8 +11,7 @@
         <button class="btn-aclaraciones" onclick="desplegarAclaraciones()">?</button>
     </div>
 
-
-    <div class="oculto aclaraciones aclaraciones-overlay" id="aclaraciones">
+    <div id="aclaraciones" class="oculto aclaraciones aclaraciones-overlay" >
         <div class="oculto aclaraciones aclaraciones-conteiner dem-colores" >
             <button class="btn-cerrar-aclaraciones" onclick="desplegarAclaraciones()" title="Cerrar">X</button>
             <p>Seleccione las materias habilitadas para aprobarlas y exonerarlas. Se habilitarán nuevas 
@@ -38,6 +37,63 @@
             </p>
         </div>
     </div>
+
+    <div id="ventanaRevalidarCreditos" class="oculto aclaraciones-overlay" >
+        <div class="aclaraciones-conteiner" >
+            <button class="btn-cerrar-aclaraciones" onclick="ocultarMostrarIdElemento('ventanaRevalidarCreditos')" title="Cerrar">X</button>
+            <div>
+                <p>Matematicas:</p>
+                <input type="number" id="revalidosMatematicas" placeholder="Creditos de Matematicas" min="0">            
+            </div>
+            <div>
+                <p>Física:</p>
+                <input type="number" id="revalidosFisica" placeholder="Creditos de Física" min="0">            
+            </div>
+            <div>
+                <p>Química:</p>
+                <input type="number" id="revalidosQuimica" placeholder="Creditos de Química" min="0">            
+            </div>
+            <div>
+                <p>Biologia:</p>
+                <input type="number" id="revalidosBiologia" placeholder="Creditos de Biologia" min="0">            
+            </div>
+            <div>
+                <p>Computacion Cientifica:</p>
+                <input type="number" id="revalidosComputacionCientifica" placeholder="Creditos de Computacion Cientifica" min="0">            
+            </div>
+            <div>
+                <p>Modelado Fisico-Matematico:</p>
+                <input type="number" id="revalidosModeladoFisicoMatematico" placeholder="Creditos de Modelado Fisico-Matematico" min="0">            
+            </div>
+            <div>
+                <p>Actividades Complementarias:</p>
+                <input type="number" id="revalidosActividadesComplementarias" placeholder="Creditos de Actividades Complementarias" min="0">            
+            </div>
+            <div>
+                <p>Ingenieria y Sociedad:</p>
+                <input type="number" id="revalidosIngenieriaYSociedad" placeholder="Creditos de Ingenieria y Sociedad" min="0">            
+            </div>
+            <div>
+                <p>Area de Formacion Tecnologica:</p>
+                <input type="number" id="revalidosAreaFormacionTecnologica" placeholder="Creditos de Area de Formacion Tecnologica" min="0">            
+            </div>
+            <div>
+                <p>Talleres:</p>
+                <input type="number" id="revalidosTalleres" placeholder="Creditos de Talleres" min="0">            
+            </div>
+            <div>
+                <p>Pasantia:</p>
+                <input type="number" id="revalidosPasantia" placeholder="Creditos de Pasantia" min="0">            
+            </div>
+            <div>
+                <p>Proyecto Final:</p>
+                <input type="number" id="revalidosProyectoFinal" placeholder="Creditos de Proyecto Final" min="0">            
+            </div>
+
+            <button onclick="sumaCreditosSimultaneo()">Revalidar</button>
+        </div>
+    </div>
+
     <div id="creditosGlobalgrupo" class="marco-superior">
         <div class="marco-superior-flex">
             <div><h3 id="creditosGlobal" data-creditos="0" data-minCreditos="450">Creditos: 0</h3>
@@ -46,30 +102,33 @@
             <div><h1>Ing. Físico-Matemático</h1></div>
         </div>
         <div class="opciones-conteiner">
-
             <label style="margin-left: 10px;">
                 <input type="radio" name="opcion-materias" value="opcion1" onchange=""> Todas las materias
             </label>
             <label style="margin-left: 10px;">
-                <input type="radio" name="opcion-materias" value="opcion3" onchange=""> Materias aprobadas y disponibles
+                <input type="radio" name="opcion-materias" value="opcion2" onchange=""> Materias disponibles y cursando
             </label>
             <label style="margin-left: 10px;">
-                <input type="radio" name="opcion-materias" value="opcion2" onchange=""> Materias disponibles
+                <input type="radio" name="opcion-materias" value="opcion3" onchange=""> Materias aprobadas y disponibles
             </label>
- 
+        </div>
+        <div>
+            <button onclick="ocultarMostrarIdElemento('ventanaRevalidarCreditos')">Revalidar Creditos</button>
+
         </div>
     </div>
-    <div>
+
+    <div id="cartelNoOficial">
         <p>⚠️⚠️ Esta página sirve de guía pero NO es un mecanismo válido para hacer tu plan de carrera ⚠️⚠️ </p>
         <p>Crea tu perfil oficial usando el instructivo disponible en la 
             <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">página del EVA</a>.
         </p>
-        <a> Se pone en verde Ing. fis mat antes de que se complete los minimos</a>
-        <a>el pop se tiene que poder eliminar al tocar afuera</a>
         <a>Que el navegador recuerde las materias que hiciste</a>
-        <a>intefas para borrar, agregar y actualizar materias</a>
+        <a>Revalidar materias, mostrar previas y habilitadas</a>
+        <a>css para revalidar creditos</a>
 
     </div>
+
     <div id="creditosCienciasBasicasgrupo" class="grupo"> 
             <p>Ciencias Básicas 
                     <button class="toggle-button active" onclick="toggleButtonMinimizar(this); ocultarMostrarIdElemento('CienciasBasicas')">▼</button>

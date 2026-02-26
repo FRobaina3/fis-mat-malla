@@ -332,7 +332,7 @@ align-items: center;
 }
 
 
-button.noDisponible{
+.noDisponible{
     color: rgb(255, 180, 180); /* Rojo tenue */
     background-color: rgb(20, 0, 0); /* Casi negro con tinte rojo */
     border: 2px solid rgb(60, 0, 0); /* Rojo muy oscuro */
@@ -347,8 +347,7 @@ button.noDisponible{
     padding: 5px;
     border-radius: 10px;
 }
-
-button.disponible{
+.disponible{
     color: rgb(255, 220, 220); /* Rojo muy claro */
     border: 2px solid rgb(255, 50, 50); /* Rojo brillante */
     background-color: rgb(150, 0, 0); /* Rojo intenso */
@@ -364,7 +363,7 @@ button.disponible{
     border-radius: 10px;
 }
 
-button.cursoAprobado{  /* Cambiado: colores del actual disponible (azul) */
+.cursoAprobado{  /* Cambiado: colores del actual disponible (azul) */
     color:rgb(209, 209, 250); /* Azul claro */
     border: 2px solid rgb(0, 150, 200); /* Azul medio */
     background-color: rgb(0, 0, 100); /* Azul oscuro */
@@ -378,7 +377,7 @@ button.cursoAprobado{  /* Cambiado: colores del actual disponible (azul) */
     border-radius: 10px;
 }
 
-button.examenAprobado{
+.examenAprobado{
     color:rgb(248, 255, 248); /* Verde claro */
     border: 2px solid rgb(0, 200, 0); /* Verde medio */
     background-color: rgb(0, 100, 0); /* Verde oscuro */

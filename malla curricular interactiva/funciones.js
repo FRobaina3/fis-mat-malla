@@ -1,7 +1,9 @@
 //Imprime una materia
 function imprimir(materia,contenedor){
   contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
-  onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
+  onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button>
+  
+  </div>`;
 }
 
 function ocultarMostrarClass(clase){
@@ -287,6 +289,7 @@ function cambiarEstado(materiaId){
 
 
 //Suma los creditos de las materias exoneradas, tiene en cuenta que suman en diferentes lugares
+//muy Fea la funcion
 function sumaCreditosSimultaneo(){ 
   //este metodo suma los creditos q le aparecen a la derecha cuando esta impreso
   let aprobadas=document.getElementsByClassName("examenAprobado");
@@ -295,7 +298,14 @@ function sumaCreditosSimultaneo(){
   for(const grp of setTodosGruposYSub){
     document.getElementById(grp).dataset.creditos="0";
   }
-  //suma en el contador de creditos invisible (data-creditos), de los subgrupos y del total global
+  //suma en el contador de creditos invisible (data-creditos), de los subgrupos y creditos revalidos  
+  for(const idRC of setIdRevalidarCreditos){
+    let campo=document.getElementById(idRC);
+    let creditos=Number(campo.value);
+    sum=sum+creditos;
+    let contadorHtml=document.getElementById(mapRevalidosASubGrupo.get(idRC));
+    contadorHtml.dataset.creditos=Number(contadorHtml.dataset.creditos)+creditos;
+  }
   for(const apr of aprobadas){
     let creditos=Number(apr.dataset.creditos);
     sum=sum+creditos;
@@ -304,7 +314,6 @@ function sumaCreditosSimultaneo(){
     let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
     let sumSub=credActualSub+creditos;
     creditosSubgrupoHtml.dataset.creditos=sumSub;
-    //creditosSubgrupoHtml.innerText="Creditos: " + sumSub ;
   }
   //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
   for(const grp of setTodosGruposYSub){
@@ -318,8 +327,8 @@ function sumaCreditosSimultaneo(){
     let creditosGroup=Number(groupHtml.dataset.creditos);
     groupHtml.dataset.creditos=creditosGroup+creditosSub;
   }
+
   let creditosGlobalHtml=document.getElementById("creditosGlobal");
-  // creditosGlobalHtml.innerText = "Creditos:" + sum;
   creditosGlobalHtml.dataset.creditos = sum;
   
   //esto recorre todos los grupos y subgrupos y actualiza el contador de creditos visible
@@ -445,34 +454,30 @@ function ocultarMostrarIdElemento(idElem){
   elem.classList.toggle("oculto");
 }
 
-//
-function imprimir(materia,contenedor){
-  contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
-  onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button></div>`;
-}
 
 
 /**
  * Determina si un botón debe mostrarse u ocultarse según el filtro
  */
 function actualizarVisibilidad(btn) {
-    // 1. Buscamos qué filtro está marcado en este preciso momento
-    const filtroActivo = document.querySelector('input[name="opcion-materias"]:checked')?.value || 'opcion1';
-    
-    let visible = false;
+  // 1. Buscamos qué filtro está marcado en este preciso momento
+  const filtroActivo = document.querySelector('input[name="opcion-materias"]:checked')?.value || 'opcion1';
+  
+  let visible = false;
 
-    if (filtroActivo === 'opcion1') {
-        visible = true; // Mostrar todas
-    } else if (filtroActivo === 'opcion2') {
-        visible = btn.classList.contains('disponible');
-    } else if (filtroActivo === 'opcion3') {
-        visible = btn.classList.contains('disponible') || 
-                  btn.classList.contains('cursoAprobado') || 
-                  btn.classList.contains('examenAprobado');
-    }
+  if (filtroActivo === 'opcion1') {
+      visible = true; // Mostrar todas
+  } else if (filtroActivo === 'opcion2') {
+      visible = btn.classList.contains('disponible') || 
+                btn.classList.contains('cursoAprobado');
+  } else if (filtroActivo === 'opcion3') {
+      visible = btn.classList.contains('disponible') || 
+                btn.classList.contains('cursoAprobado') || 
+                btn.classList.contains('examenAprobado');
+  }
 
-    // 2. Aplicamos el cambio visual
-    btn.style.display = visible ? '' : 'none';
+  // 2. Aplicamos el cambio visual
+  btn.style.display = visible ? '' : 'none';
 }
 
 function iniciarSistemaMaterias() {
@@ -509,3 +514,4 @@ function iniciarSistemaMaterias() {
 
 // Arrancamos cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', iniciarSistemaMaterias);
+

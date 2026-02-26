@@ -1354,3 +1354,23 @@ let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria
     ["creditosAreaDeFormacionTecnologica","creditosIngenieriaAplicada"],["creditosTalleres","creditosIngenieriaAplicada"],
     ["creditosPasantia","creditosIngenieriaAplicada"],["creditosProyectoFinal","creditosIngenieriaAplicada"]
   ]);
+
+let setIdRevalidarCreditos=new Set(["revalidosMatematicas","revalidosFisica","revalidosQuimica","revalidosBiologia",
+    "revalidosComputacionCientifica","revalidosModeladoFisicoMatematico","revalidosActividadesComplementarias",
+    "revalidosIngenieriaYSociedad","revalidosAreaFormacionTecnologica","revalidosTalleres","revalidosPasantia","revalidosProyectoFinal"
+]);
+
+let mapRevalidosASubGrupo = new Map([
+  ["revalidosMatematicas", "creditosmatematicas"],
+  ["revalidosFisica", "creditosfisica"],
+  ["revalidosQuimica", "creditosquimica"],
+  ["revalidosBiologia", "creditosbiologia"],
+  ["revalidosComputacionCientifica", "creditosComputacionCientifica"],
+  ["revalidosModeladoFisicoMatematico", "creditosModeladoFiscoMatematico"],
+  ["revalidosActividadesComplementarias", "creditosActividadesComplementarias"],
+  ["revalidosIngenieriaYSociedad", "creditosIngenieriaYSociedad"],
+  ["revalidosAreaFormacionTecnologica", "creditosAreaDeFormacionTecnologica"],
+  ["revalidosTalleres", "creditosTalleres"],
+  ["revalidosPasantia", "creditosPasantia"],
+  ["revalidosProyectoFinal", "creditosProyectoFinal"]
+]);
