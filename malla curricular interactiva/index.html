@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Malla Fis-Mat</title>
+    <link rel="icon" href="icono.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -125,8 +126,7 @@
         </p>
         <a>Que el navegador recuerde las materias que hiciste</a>
         <a>Revalidar materias, mostrar previas y habilitadas</a>
-        <a>css para revalidar creditos</a>
-
+        <a>css para revalidar creditos y opciones de vista</a>
     </div>
 
     <div id="creditosCienciasBasicasgrupo" class="grupo"> 
@@ -245,6 +245,20 @@
         </div>
     </div>
     </div>
+
+    <div id="opcionesMateria-overlay" class="oculto aclaraciones-overlay">
+        <div id="opcionesMateria" class="aclaraciones-conteiner">
+            <button class="btn-cerrar-aclaraciones" onclick="ocultarMostrarIdElemento('opcionesMateria-overlay')" title="Cerrar">X</button>
+            <h2 id="tituloOpcionesMateria">Opciones de materia</h2>
+            <div id="revalidarMateria">
+            </div>
+            <div id="opcionesMateriaPrevias"></div>
+            <div id="opcionesMateriaCreditosArea"></div>
+            <div id="opcionesMateriaCondiciones"></div>
+            <div id="opcionesMateriaHabilita"> </div>
+        </div>
+    </div>
+
     <div class="bottom">
         <p class="bottom-firma">Felipe Robaina Passeggi 2026</p> 
         <p class="bottom-contacto">Contacto: felirobaina3@gmail.com</p>

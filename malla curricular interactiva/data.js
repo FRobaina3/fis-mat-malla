@@ -1148,10 +1148,10 @@ const areaDeFormacionTecnologica=[
             previasExamen:["FuAA"],
             previasCurso:[],
         },
-        cond3:{
-            previasExamen:["FuAA"],//reconocimento de patrones 5842 en ves de FuAA
-            previasCurso:[],
-        },
+        // cond3:{
+        //     previasExamen:["FuAA"],//reconocimento de patrones 5842 en ves de FuAA
+        //     previasCurso:[],
+        // },
     },
     creditosPorArea: new Map()
     },
@@ -1237,10 +1237,10 @@ const Talleres=[
             previasExamen:[],
             previasCurso:["ApAuto"],
         },
-        cond1:{
+        cond2:{
             previasExamen:["FuAA"],
             previasCurso:[],
-        },
+        }
     },
     creditosPorArea: new Map()
     },   
@@ -1339,9 +1339,7 @@ let setTodosGruposYSub=new Set(["creditosGlobal","creditosCienciasBasicas","cred
     "creditosActividadesComplementarias","creditosIngenieriaYSociedad","creditosIngenieriaAplicada", "creditosAreaDeFormacionTecnologica",
     "creditosTalleres","creditosPasantia","creditosProyectoFinal"]);
     
-
-let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria",
-    "creditosContenidosComplementarios","creditosIngenieriaAplicada"]);
+let setGrupos=new Set(["creditosCienciasBasicas","creditosCienciasDeLaIngenieria", "creditosContenidosComplementarios","creditosIngenieriaAplicada"]);
 
     let setSub=new Set(["creditosmatematicas", "creditosfisica","creditosquimica","creditosbiologia",
     "creditosComputacionCientifica","creditosModeladoFiscoMatematico","creditosActividadesComplementarias",
@@ -1373,4 +1371,23 @@ let mapRevalidosASubGrupo = new Map([
   ["revalidosTalleres", "creditosTalleres"],
   ["revalidosPasantia", "creditosPasantia"],
   ["revalidosProyectoFinal", "creditosProyectoFinal"]
+]);
+let mapNombresAreas = new Map([
+  ["creditosGlobal", "Total"],
+  ["creditosCienciasBasicas", "Ciencias Básicas"],
+  ["creditosmatematicas", "Matemáticas"],
+  ["creditosfisica", "Física"],
+  ["creditosquimica", "Química"],
+  ["creditosbiologia", "Biología"],
+  ["creditosCienciasDeLaIngenieria", "Ciencias de la Ingeniería"],
+  ["creditosComputacionCientifica", "Computación Científica"],
+  ["creditosModeladoFiscoMatematico", "Modelado Físico-Matemático"],
+  ["creditosContenidosComplementarios", "Contenidos Complementarios"],
+  ["creditosActividadesComplementarias", "Actividades Complementarias"],
+  ["creditosIngenieriaYSociedad", "Ingeniería y Sociedad"],
+  ["creditosIngenieriaAplicada", "Ingeniería Aplicada"],
+  ["creditosAreaDeFormacionTecnologica", "Área de Formación Tecnológica"],
+  ["creditosTalleres", "Talleres"],
+  ["creditosPasantia", "Pasantía"],
+  ["creditosProyectoFinal", "Proyecto Final"]
 ]);

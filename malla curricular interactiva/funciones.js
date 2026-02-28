@@ -2,7 +2,7 @@
 function imprimir(materia,contenedor){
   contenedor.innerHTML += `<div><button class="${materia.id} ${contenedor.id} noDisponible" data-creditos="${materia.creditos}" 
   onclick="cambiarEstado('${materia.id}')">${materia.nombre} (${materia.creditos})</button>
-  
+  <button class="${materia.id}Opciones materiaOpciones " onclick="ventanaOpcionesMateria('${materia.id}')"> ... </button>
   </div>`;
 }
 
@@ -266,18 +266,20 @@ function actualizarNoDisponible(materiaId){
 function cambiarEstado(materiaId){
   const buttonList=document.getElementsByClassName(materiaId);
   for(const btn of buttonList){
-    if( ! btn.classList.contains("noDisponible")){     
-      let estActual=estados.find(m=>btn.classList.contains(m));
-      btn.classList.remove(estActual);
-      let estActualI=estados.indexOf(estActual);
-      btn.classList.add(estados[(estActualI+1) % estados.length ]);   
-    }
-    if( btn.classList.contains("noDisponible") || btn.classList.contains("disponible") ){
-        window.requestAnimationFrame(()=>actualizarNoDisponible(materiaId));
-    }else if(btn.classList.contains("cursoAprobado")){
-        materiasAprobadasMap.set(materiaId,"cursoAprobado");
-    }else if(btn.classList.contains("examenAprobado")){
-        materiasAprobadasMap.set(materiaId,"examenAprobado");
+    if(! btn.classList.contains("revalida")){
+      if( ! btn.classList.contains("noDisponible")){     
+        let estActual=estados.find(m=>btn.classList.contains(m));
+        btn.classList.remove(estActual);
+        let estActualI=estados.indexOf(estActual);
+        btn.classList.add(estados[(estActualI+1) % estados.length ]);   
+      }
+      if( btn.classList.contains("noDisponible") || btn.classList.contains("disponible") ){
+          window.requestAnimationFrame(()=>actualizarNoDisponible(materiaId));
+      }else if(btn.classList.contains("cursoAprobado")){
+          materiasAprobadasMap.set(materiaId,"cursoAprobado");
+      }else if(btn.classList.contains("examenAprobado")){
+          materiasAprobadasMap.set(materiaId,"examenAprobado");
+      }
     }
   }
   window.requestAnimationFrame(() => {
@@ -306,11 +308,13 @@ function sumaCreditosSimultaneo(){
     let contadorHtml=document.getElementById(mapRevalidosASubGrupo.get(idRC));
     contadorHtml.dataset.creditos=Number(contadorHtml.dataset.creditos)+creditos;
   }
+  console.log(aprobadas)
   for(const apr of aprobadas){
     let creditos=Number(apr.dataset.creditos);
     sum=sum+creditos;
     let subgrupo=apr.classList[1];
     let creditosSubgrupoHtml=document.getElementById("creditos"+subgrupo);
+    console.log(creditosSubgrupoHtml);
     let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
     let sumSub=credActualSub+creditos;
     creditosSubgrupoHtml.dataset.creditos=sumSub;
@@ -477,9 +481,20 @@ function actualizarVisibilidad(btn) {
   }
 
   // 2. Aplicamos el cambio visual
-  btn.style.display = visible ? '' : 'none';
+  let matId=btn.classList[0];
+  let listaBtnOpciones=document.getElementsByClassName(`${matId}Opciones`);
+  if(visible){
+    btn.style.display='';
+    for(const btnO of listaBtnOpciones){
+      btnO.style.display='';
+    }
+  }else{
+    btn.style.display='none';
+    for(const btnO of listaBtnOpciones){
+      btnO.style.display='none';
+    }
+  }
 }
-
 function iniciarSistemaMaterias() {
     const botones = document.querySelectorAll('button.disponible, button.noDisponible, button.cursoAprobado, button.examenAprobado');
     const radios = document.querySelectorAll('input[name="opcion-materias"]');
@@ -511,7 +526,130 @@ function iniciarSistemaMaterias() {
     // C. Ejecución inicial (para que empiece filtrado al cargar la página)
     botones.forEach(btn => actualizarVisibilidad(btn));
 }
-
 // Arrancamos cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', iniciarSistemaMaterias);
+
+
+function setNombresDeArrayId(array){
+  let arrayNombres= [];
+  for(const matId of array){
+    let mat=materiasMap.get(matId);
+    arrayNombres.push(mat.nombre);
+  }
+  return arrayNombres;
+}
+function imprimirExamenesPrevios(materiaId){
+  let materia=materiasMap.get(materiaId);
+  let previasHtml= document.getElementById("opcionesMateriaPrevias");
+  let nombPrevCurso=setNombresDeArrayId(materia.previasCurso);
+  let nombPrevExamen=setNombresDeArrayId(materia.previasExamen);
+  previasHtml.innerHTML="<p>Examenes previos: " +nombPrevExamen.join(", ")+"</p>"
+  +"<p>Cursos previos: " +nombPrevCurso.join("  ,  ")+"</p>";
+}
+function imprimirCursosPrevios(materiaId){
+  let materia=materiasMap.get(materiaId);
+  let credAreaHtml=document.getElementById("opcionesMateriaCreditosArea");
+  credAreaHtml.innerHTML="<p>Creditos por area:</p>"
+  if(materia.creditosPorArea.size>0){
+    let nombre;
+    for(const [clave,cred] of materia.creditosPorArea){
+      nombre=mapNombresAreas.get(clave);
+      credAreaHtml.innerHTML+=`<p>${nombre}: ${cred}</p>`;
+    }
+  } 
+}
+function imprimirCreditosPorArea(materiaId){
+  let habilitaHtml= document.getElementById("opcionesMateriaHabilita");
+  habilitaHtml.innerHTML="<p>Habilita: </p>";
+  if(materiaHabilitaMap.has(materiaId)){
+    let setHabilitadasId=materiaHabilitaMap.get(materiaId);
+    let arrayIdHabilitadas=Array.from(setHabilitadasId);
+    let nombHabilitadas=setNombresDeArrayId(arrayIdHabilitadas);
+    habilitaHtml.innerHTML="<p>Habilita: " +nombHabilitadas.join(" , ")+"</p>";
+  }
+}
+function imprimirCondicion(numCond,cond){
+  let condicionesHtml=document.getElementById("opcionesMateriaCondiciones")
+  condicionesHtml.innerHTML+=`<p>Condicion ${numCond}:</p>`;
+  let nombPrevCurso=setNombresDeArrayId(cond.previasCurso);
+  let nombPrevExamen=setNombresDeArrayId(cond.previasExamen);
+  condicionesHtml.innerHTML+="<p>Examenes previos:"+nombPrevExamen.join(" , ")+ "</p>";
+  condicionesHtml.innerHTML+="<p>Cursos previos:"+nombPrevCurso.join(" , ")+ "</p>";
+}
+function imprimirCondiciones(materiaId){
+  let materia=materiasMap.get(materiaId);
+  if(materia.condicionesPrevias){
+    let condicionesHtml=document.getElementById("opcionesMateriaCondiciones");
+    condicionesHtml.innerHTML="<p>Se debe satisfaser alguno de los siguientes grupos de previas:</p>";
+    let i=1;
+    for(const valor of Object.values(materia.condicionesPrevias)){
+      imprimirCondicion(i,valor);
+      i++;
+    }
+  }
+}
+function imprimirBotonRevalidar(materiaId){
+  let realidarHtml=document.getElementById("revalidarMateria");
+  realidarHtml.innerHTML =
+   `<p>Revalidar materia
+      <label class="switch">
+        <input type="checkbox" id="revalidaSwitch" onclick="revalidarMateria('${materiaId}')">
+        <span class="slider"></span>
+      </label>
+    </p>`;
+  let matList=document.getElementsByClassName(materiaId);
+  matList[0].classList.contains("revalida");
+  let esRevalida=matList[0].classList.contains("revalida");
+  document.getElementById("revalidaSwitch").checked =esRevalida;
+
+  revalidaSwitch.addEventListener("change", (e) => {
+    if (revalidaSwitch.checked && (matList[0].classList.contains("examenAprobado") && !matList[0].classList.contains("revalida")) ) {
+      e.preventDefault();       // evita el cambio
+      revalidaSwitch.checked = false; // fuerza a que quede desactivado
+    }
+  });
+}
+function ventanaOpcionesMateria(materiaId){
+  imprimirBotonRevalidar(materiaId);
+  imprimirExamenesPrevios(materiaId);
+  imprimirCursosPrevios(materiaId);
+  imprimirCreditosPorArea(materiaId);
+  imprimirCondiciones(materiaId);
+  ocultarMostrarIdElemento('opcionesMateria-overlay');
+}
+
+function revalidarMateria(materiaId){
+  const buttonList=document.getElementsByClassName(materiaId);
+  const interruptor=document.getElementById("revalidaSwitch");
+  if(interruptor.checked){
+    for(const btn of buttonList){
+      if( ! btn.classList.contains("examenAprobado")){     
+        let estActual=estados.find(m=>btn.classList.contains(m));
+        btn.classList.remove(estActual);
+        btn.classList.add("examenAprobado");  
+        btn.classList.add("revalida");
+        materiasAprobadasMap.set(materiaId,"cursoAprobado");
+      }else{
+        interruptor.checked=true;
+      }
+    }
+  }else{
+    for(const btn of buttonList){
+      if(btn.classList.contains("revalida") && btn.classList.contains("examenAprobado")){
+        btn.classList.remove("examenAprobado");  
+        btn.classList.remove("revalida");
+        btn.classList.add("noDisponible");
+        materiasAprobadasMap.delete(materiaId);
+        window.requestAnimationFrame(()=>actualizarNoDisponible(materiaId));
+      }      
+    }
+  }
+  window.requestAnimationFrame(() => {
+    actualizarDisponibles();
+    sumaCreditosSimultaneo();
+  });
+  
+
+
+}
 
