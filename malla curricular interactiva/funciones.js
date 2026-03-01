@@ -538,49 +538,51 @@ function setNombresDeArrayId(array){
   }
   return arrayNombres;
 }
-function imprimirExamenesPrevios(materiaId){
+function imprimirPrevias(materiaId){
   let materia=materiasMap.get(materiaId);
   let previasHtml= document.getElementById("opcionesMateriaPrevias");
   let nombPrevCurso=setNombresDeArrayId(materia.previasCurso);
   let nombPrevExamen=setNombresDeArrayId(materia.previasExamen);
-  previasHtml.innerHTML="<p>Examenes previos: " +nombPrevExamen.join(", ")+"</p>"
-  +"<p>Cursos previos: " +nombPrevCurso.join("  ,  ")+"</p>";
+  previasHtml.innerHTML="<p class='textoOpcionesMateria examenYCurso'>Examenes previos: " +nombPrevExamen.join(", ")+"</p>"
+  +"<p class='textoOpcionesMateria examenYCurso'>Cursos previos: " +nombPrevCurso.join("  ,  ")+"</p>";
 }
-function imprimirCursosPrevios(materiaId){
+function imprimirCreditosPorArea(materiaId){
   let materia=materiasMap.get(materiaId);
   let credAreaHtml=document.getElementById("opcionesMateriaCreditosArea");
-  credAreaHtml.innerHTML="<p>Creditos por area:</p>"
+  credAreaHtml.innerHTML="<p class='tituloOpcionesMateria'>Creditos por area:</p>"
   if(materia.creditosPorArea.size>0){
     let nombre;
     for(const [clave,cred] of materia.creditosPorArea){
       nombre=mapNombresAreas.get(clave);
-      credAreaHtml.innerHTML+=`<p>${nombre}: ${cred}</p>`;
+      credAreaHtml.innerHTML+=`<p class='textoOpcionesMateria examenYCurso'>${nombre}: ${cred}</p>`;
     }
-  } 
+  }else{
+    credAreaHtml.innerHTML+=`<p class='textoOpcionesMateria'>--</p>`;
+  }
 }
-function imprimirCreditosPorArea(materiaId){
+function imprimirHabilitadas(materiaId){
   let habilitaHtml= document.getElementById("opcionesMateriaHabilita");
-  habilitaHtml.innerHTML="<p>Habilita: </p>";
+  habilitaHtml.innerHTML="<p class='textoOpcionesMateria examenYCurso'> </p>";
   if(materiaHabilitaMap.has(materiaId)){
     let setHabilitadasId=materiaHabilitaMap.get(materiaId);
     let arrayIdHabilitadas=Array.from(setHabilitadasId);
     let nombHabilitadas=setNombresDeArrayId(arrayIdHabilitadas);
-    habilitaHtml.innerHTML="<p>Habilita: " +nombHabilitadas.join(" , ")+"</p>";
+    habilitaHtml.innerHTML="<p class='textoOpcionesMateria examenYCurso'>" +nombHabilitadas.join(" , ")+"</p>";
   }
 }
 function imprimirCondicion(numCond,cond){
   let condicionesHtml=document.getElementById("opcionesMateriaCondiciones")
-  condicionesHtml.innerHTML+=`<p>Condicion ${numCond}:</p>`;
+  condicionesHtml.innerHTML+=`<p class='textoOpcionesMateria'>Condicion ${numCond}:</p>`;
   let nombPrevCurso=setNombresDeArrayId(cond.previasCurso);
   let nombPrevExamen=setNombresDeArrayId(cond.previasExamen);
-  condicionesHtml.innerHTML+="<p>Examenes previos:"+nombPrevExamen.join(" , ")+ "</p>";
-  condicionesHtml.innerHTML+="<p>Cursos previos:"+nombPrevCurso.join(" , ")+ "</p>";
+  condicionesHtml.innerHTML+="<p class='condicionOpcionesMateria examenYCurso' >Examenes previos: "+nombPrevExamen.join(" , ")+ "</p>";
+  condicionesHtml.innerHTML+="<p class='condicionOpcionesMateria examenYCurso' >Cursos previos: "+nombPrevCurso.join(" , ")+ "</p>";
 }
 function imprimirCondiciones(materiaId){
   let materia=materiasMap.get(materiaId);
   if(materia.condicionesPrevias){
     let condicionesHtml=document.getElementById("opcionesMateriaCondiciones");
-    condicionesHtml.innerHTML="<p>Se debe satisfaser alguno de los siguientes grupos de previas:</p>";
+    condicionesHtml.innerHTML="<p class='tituloOpcionesMateria'>Se debe satisfaser alguno de los siguientes grupos de previas:</p>";
     let i=1;
     for(const valor of Object.values(materia.condicionesPrevias)){
       imprimirCondicion(i,valor);
@@ -591,7 +593,7 @@ function imprimirCondiciones(materiaId){
 function imprimirBotonRevalidar(materiaId){
   let realidarHtml=document.getElementById("revalidarMateria");
   realidarHtml.innerHTML =
-   `<p>Revalidar materia
+   `<p class="tituloOpcionesMateria">Revalidar materia
       <label class="switch">
         <input type="checkbox" id="revalidaSwitch" onclick="revalidarMateria('${materiaId}')">
         <span class="slider"></span>
@@ -611,10 +613,10 @@ function imprimirBotonRevalidar(materiaId){
 }
 function ventanaOpcionesMateria(materiaId){
   imprimirBotonRevalidar(materiaId);
-  imprimirExamenesPrevios(materiaId);
-  imprimirCursosPrevios(materiaId);
+  imprimirPrevias(materiaId);
   imprimirCreditosPorArea(materiaId);
   imprimirCondiciones(materiaId);
+  imprimirHabilitadas(materiaId);
   ocultarMostrarIdElemento('opcionesMateria-overlay');
 }
 

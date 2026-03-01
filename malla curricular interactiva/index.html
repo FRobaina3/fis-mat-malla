@@ -90,8 +90,7 @@
                 <p>Proyecto Final:</p>
                 <input type="number" id="revalidosProyectoFinal" placeholder="Creditos de Proyecto Final" min="0">            
             </div>
-
-            <button onclick="sumaCreditosSimultaneo()">Revalidar</button>
+            <button class="btnRevalidarConfirmacion" onclick="sumaCreditosSimultaneo()">Revalidar</button>
         </div>
     </div>
 
@@ -100,22 +99,19 @@
             <div><h3 id="creditosGlobal" data-creditos="0" data-minCreditos="450">Creditos: 0</h3>
                 <p> Mínimo 450</p>
             </div>
-            <div><h1>Ing. Físico-Matemático</h1></div>
+            <div class="titulo"><h1>Ing. Físico-Matemático</h1></div>
         </div>
         <div class="opciones-conteiner">
-            <label style="margin-left: 10px;">
+            <label style="margin-left: 20px;">
                 <input type="radio" name="opcion-materias" value="opcion1" onchange=""> Todas las materias
             </label>
-            <label style="margin-left: 10px;">
+            <label style="margin-left: 20px;">
                 <input type="radio" name="opcion-materias" value="opcion2" onchange=""> Materias disponibles y cursando
             </label>
-            <label style="margin-left: 10px;">
+            <label style="margin-left: 20px;">
                 <input type="radio" name="opcion-materias" value="opcion3" onchange=""> Materias aprobadas y disponibles
             </label>
-        </div>
-        <div>
-            <button onclick="ocultarMostrarIdElemento('ventanaRevalidarCreditos')">Revalidar Creditos</button>
-
+            <button style="margin-left: 50px;" class="btnRevalidar" onclick="ocultarMostrarIdElemento('ventanaRevalidarCreditos')">Revalidar Creditos</button>
         </div>
     </div>
 
@@ -124,9 +120,6 @@
         <p>Crea tu perfil oficial usando el instructivo disponible en la 
             <a href="https://eva.fing.edu.uy/course/view.php?id=1570&section=2#tabs-tree-start">página del EVA</a>.
         </p>
-        <a>Que el navegador recuerde las materias que hiciste</a>
-        <a>Revalidar materias, mostrar previas y habilitadas</a>
-        <a>css para revalidar creditos y opciones de vista</a>
     </div>
 
     <div id="creditosCienciasBasicasgrupo" class="grupo"> 
@@ -249,20 +242,21 @@
     <div id="opcionesMateria-overlay" class="oculto aclaraciones-overlay">
         <div id="opcionesMateria" class="aclaraciones-conteiner">
             <button class="btn-cerrar-aclaraciones" onclick="ocultarMostrarIdElemento('opcionesMateria-overlay')" title="Cerrar">X</button>
-            <h2 id="tituloOpcionesMateria">Opciones de materia</h2>
-            <div id="revalidarMateria">
-            </div>
+            <div id="revalidarMateria"></div>
+            <h2 style="text-align: center;">Previas</h2>
+            <p class="tituloOpcionesMateria">Previas obligatorias</p>
             <div id="opcionesMateriaPrevias"></div>
             <div id="opcionesMateriaCreditosArea"></div>
             <div id="opcionesMateriaCondiciones"></div>
+            <h2 style="text-align: center;">Habilita las siguientes materias</h2>
             <div id="opcionesMateriaHabilita"> </div>
         </div>
     </div>
 
-    <div class="bottom">
+    <footer class="bottom">
         <p class="bottom-firma">Felipe Robaina Passeggi 2026</p> 
         <p class="bottom-contacto">Contacto: felirobaina3@gmail.com</p>
-    </div>
+    </footer>
     
     <script src="data.js"></script>
     <script src="funciones.js"></script>
