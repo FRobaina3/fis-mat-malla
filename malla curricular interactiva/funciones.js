@@ -76,6 +76,8 @@ function esPreviaAprobada(examenOCurso,previa){
     if(preList.length>0){
       let pre=preList[0];
       if(examenOCurso==="curso"){
+        
+        // console.log(pre);
         ret= (pre.classList.contains("cursoAprobado") || pre.classList.contains("examenAprobado"));        
       }else if (examenOCurso ==="examen"){
         ret=  pre.classList.contains("examenAprobado");
@@ -137,11 +139,20 @@ function disponible(materiaId){
   while(res==true && i<materia.previasCurso.length){
     let previaC=materia.previasCurso[i];
     res=res && esPreviaAprobada("curso", previaC);
+    if(materiaId==="CV"){
+      console.log("pasa por el while de cursos")
+      console.log(res);
+    }
     i++;
   }
+  i=0;
   while(res==true && i<materia.previasExamen.length){
     let previaE=materia.previasExamen[i];
     res=res && esPreviaAprobada("examen", previaE);
+        if(materiaId==="CV"){
+      console.log("pasa por el while de examenes")
+      console.log(res);
+    }
     i++;  
   }
   if(materia.condicionesPrevias){
@@ -159,6 +170,9 @@ function actualizarDisponiblesInicial(){
     habilitar(mat.id,1);
    }else{
     habilitar(mat.id,0);
+   }
+   if(mat.id==="CV"){
+    console.log("esta en el map");
    }
   })
 }
@@ -308,13 +322,11 @@ function sumaCreditosSimultaneo(){
     let contadorHtml=document.getElementById(mapRevalidosASubGrupo.get(idRC));
     contadorHtml.dataset.creditos=Number(contadorHtml.dataset.creditos)+creditos;
   }
-  console.log(aprobadas)
   for(const apr of aprobadas){
     let creditos=Number(apr.dataset.creditos);
     sum=sum+creditos;
     let subgrupo=apr.classList[1];
     let creditosSubgrupoHtml=document.getElementById("creditos"+subgrupo);
-    console.log(creditosSubgrupoHtml);
     let credActualSub=Number(creditosSubgrupoHtml.dataset.creditos);
     let sumSub=credActualSub+creditos;
     creditosSubgrupoHtml.dataset.creditos=sumSub;

@@ -50,3 +50,4 @@ actualizarDisponiblesInicial();
 previasInvertidas();
 
 actualizarDisponibles();
+desplegarAclaraciones();
