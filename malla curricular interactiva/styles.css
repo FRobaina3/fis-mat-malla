@@ -435,23 +435,26 @@ a{
     background-color: rgb(65, 159, 65); 
     border: 2px solid rgb(255, 255, 255);
 }
-.materiaOpciones{
-    color:rgb(255, 255, 255); /* Verde claro */
-    border: 2px solid rgb(255, 251, 9); /* Verde medio */
-    background-color: rgb(87, 85, 4); /* Verde oscuro */
-    font-size:medium;
-    font-weight:500;
-    text-align:center;
-    height:fit-content;
-    width:fit-content;
+
+.materiaOpciones {
+    color: #fff;
+    border: 2px solid rgb(255, 255, 255); /* Slate gray border */
+    background-color: rgb(80, 90, 110); /* Slate gray */
+    font-size: medium;
+    font-weight: 600;
+    text-align: center;
+    height: fit-content;
+    width: fit-content;
     margin: 5px;
-    padding: 5px;
+    padding: 4px 10px;
     border-radius: 10px;
+    box-shadow: none;
+    transition: background 0.2s, border 0.2s;
 }
-.materiaOpciones:hover{
-    color:rgb(255, 255, 255); /* Verde claro */
-    border: 2px solid rgb(255, 251, 9); /* Verde medio */
-    background-color: rgb(163, 134, 3); /* Verde oscuro */
+.materiaOpciones:hover {
+    color: #3c3a3a;
+    background-color: rgb(206, 215, 233);
+    border: 2px solid rgb(140, 150, 170);
 }
 
 .bottom{
@@ -527,15 +530,17 @@ input:checked + .slider:before {
     height:fit-content;
     width:fit-content;
     border-radius: 5px;
-    color:rgb(18, 18, 32); 
-    border: 2px solid rgb(0, 0, 0);
-    background-color: rgb(227, 216, 93);
+    color: #fff;
+    border: 2px solid rgb(255, 255, 255); /* Slate gray border */
+    background-color: rgb(80, 90, 110); /* Slate gray */
 
 }
 .btnRevalidar:hover{
-    background-color: rgb(250, 246, 16);
-    border: 2px solid rgb(254, 255, 224);
+    color: #3c3a3a;
+    background-color: rgb(206, 215, 233);
+    border: 2px solid rgb(140, 150, 170);
 }
+
 .btnRevalidarConfirmacion{
   position: sticky;
   bottom: 0;   

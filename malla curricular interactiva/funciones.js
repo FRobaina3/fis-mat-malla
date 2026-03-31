@@ -58,12 +58,14 @@ function previasInvertidas(){
 function habilitar(materiaId,siono){
   let matList=document.getElementsByClassName(materiaId);
   for(const estado of matList){
-    if(estado.classList.contains("noDisponible") && siono==1){
-      estado.classList.remove("noDisponible");
-      estado.classList.add("disponible");
-    }else if(!estado.classList.contains("noDisponible") && siono==0){
-      estado.classList.remove("disponible" , "cursoAprobado", "examenAprobado");
-      estado.classList.add("noDisponible");    
+    if(!estado.classList.contains("revalida")){
+      if(estado.classList.contains("noDisponible") && siono==1){
+        estado.classList.remove("noDisponible");
+        estado.classList.add("disponible");
+      }else if(!estado.classList.contains("noDisponible") && siono==0){
+        estado.classList.remove("disponible" , "cursoAprobado", "examenAprobado");
+        estado.classList.add("noDisponible");    
+      }
     }
   }
 }
@@ -76,8 +78,6 @@ function esPreviaAprobada(examenOCurso,previa){
     if(preList.length>0){
       let pre=preList[0];
       if(examenOCurso==="curso"){
-        
-        // console.log(pre);
         ret= (pre.classList.contains("cursoAprobado") || pre.classList.contains("examenAprobado"));        
       }else if (examenOCurso ==="examen"){
         ret=  pre.classList.contains("examenAprobado");
@@ -139,10 +139,6 @@ function disponible(materiaId){
   while(res==true && i<materia.previasCurso.length){
     let previaC=materia.previasCurso[i];
     res=res && esPreviaAprobada("curso", previaC);
-    if(materiaId==="CV"){
-      console.log("pasa por el while de cursos")
-      console.log(res);
-    }
     i++;
   }
   i=0;
@@ -150,8 +146,6 @@ function disponible(materiaId){
     let previaE=materia.previasExamen[i];
     res=res && esPreviaAprobada("examen", previaE);
         if(materiaId==="CV"){
-      console.log("pasa por el while de examenes")
-      console.log(res);
     }
     i++;  
   }
@@ -171,9 +165,6 @@ function actualizarDisponiblesInicial(){
    }else{
     habilitar(mat.id,0);
    }
-   if(mat.id==="CV"){
-    console.log("esta en el map");
-   }
   })
 }
 //evalua las materias aprovadas y marca cuales estan disponibles
@@ -190,15 +181,15 @@ function actualizarDisponibles(){
       })
     } 
   }
-for (const [contador, setMaterias] of contadorHabilitaMap) {
-  for (const mat of setMaterias) {
-    if(disponible(mat)){
-      habilitar(mat,1);
-    }else{
-      habilitar(mat,0);
+  for (const [contador, setMaterias] of contadorHabilitaMap) {
+    for (const mat of setMaterias) {
+      if(disponible(mat)){
+        habilitar(mat,1);
+      }else{
+        habilitar(mat,0);
+      }
     }
   }
-}
 }
 
 //revisa previaId es una previa obligatoria de materiaId
@@ -231,7 +222,7 @@ function actualizarNoDisponible(materiaId){
       if(esPreviaObligatoria(matId,materiaId)){
         const buttonList=document.getElementsByClassName(matId);
         for(const btn of buttonList){
-          if( ! btn.classList.contains("noDisponible")){                  
+          if( !btn.classList.contains("noDisponible") && !btn.classList.contains("revalida") ){   
             let estActual=estados.find(m=>btn.classList.contains(m));
             btn.classList.remove(estActual);
             btn.classList.add("noDisponible");  
@@ -239,15 +230,16 @@ function actualizarNoDisponible(materiaId){
             actualizarNoDisponible(matId);
           }
         }
+
       //Si materiaId esta en las opcionales        
       }else{
         //reevaluar (si tiene creditos como previa asumir que no llega)
         let mat=materiasMap.get(matId);
-        if(mat.creditosPorArea.size==0){//matId no es un objeto
+        if(mat.creditosPorArea.size==0){
           if(! disponible(matId)){
             const buttonList=document.getElementsByClassName(matId);
             for(const btn of buttonList){
-              if( ! btn.classList.contains("noDisponible")){                  
+              if( ! btn.classList.contains("noDisponible") && !btn.classList.contains("revalida")){                
                 let estActual=estados.find(m=>btn.classList.contains(m));
                 btn.classList.remove(estActual);
                 btn.classList.add("noDisponible");  
@@ -260,7 +252,7 @@ function actualizarNoDisponible(materiaId){
           //marcar como no disponible
           const buttonList=document.getElementsByClassName(matId);
           for(const btn of buttonList){
-            if( ! btn.classList.contains("noDisponible")){                  
+            if( ! btn.classList.contains("noDisponible") && !btn.classList.contains("revalida")){         
               let estActual=estados.find(m=>btn.classList.contains(m));
               btn.classList.remove(estActual);
               btn.classList.add("noDisponible");  

@@ -974,7 +974,7 @@ const areaDeFormacionTecnologica=[
     creditosPorArea: new Map([["creditosfisica", 50],["creditosmatematicas",50]])
     },
     {id:"FRA",//1857
-    nombre:"Fundmanetos de la Robotica Autonoma",
+    nombre:"Fundamenetos de la Robotica Autonoma",
     creditos:7,
     previasExamen:["P2","P1"],
     previasCurso:[],
@@ -991,7 +991,7 @@ const areaDeFormacionTecnologica=[
     creditosPorArea: new Map([["creditosfisica",50],["creditosmatematicas",50]])
     },
     {id:"FRI",//1788
-    nombre:"Fundmanetos de la Robotica Industrial",
+    nombre:"Fundamentos de la Robotica Industrial",
     creditos:8,
     previasExamen:["MecNew","P1"],
     previasCurso:[],
