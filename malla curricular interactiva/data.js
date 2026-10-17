@@ -1162,7 +1162,7 @@ const areaDeFormacionTecnologica=[
     {id:"TL",//1325
     nombre:"Teoria de Lenguajes",
     creditos:12,
-    previasExamen:["P3"],
+    previasExamen:[],
     previasCurso:[],
     condicionesPrevias:{
         cond1:{
